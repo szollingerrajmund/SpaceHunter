@@ -1,8 +1,9 @@
-#import pygame
-#import time
+import time
+import pygame
+
 
 def main() -> None:
-    print('Hello')
+    
 
 
 if __name__ == "__main__":
