@@ -1,5 +1,5 @@
 import pygame
-from settings import *
+from settings import HEIGHT, WIDTH , FPS
 class Game(object):
 
     pygame.init()
