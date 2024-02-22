@@ -1,22 +1,30 @@
 import pygame
-from settings import HEIGHT, WIDTH , FPS
+from settings import HEIGHT, WIDTH
 class Game(object):
+    def __init__(self):
+        self._init_pygame()
+        self.screen = pygame.display.set_mode((WIDTH,HEIGHT))
 
-    pygame.init()
-    Háttérkép = pygame.image.load("Képek/background.png")
-    Háttér=pygame.transform.scale(Háttérkép,(WIDTH,HEIGHT))
-    screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    clock = pygame.time.Clock()
+    def main_loop(self):
+        while True:
+            self._input_kezelés()
+            self._process_game_logic()
+            self._rajz()
 
-  
-    running = True
-    while running:
+    def _init_pygame(self):
+        pygame.init()
+        pygame.display.set_caption("Space Hunters")
+
+    def _input_kezelés(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
-  
-        screen.blit(Háttér,(0,0))
-        pygame.display.update()
-        clock.tick(FPS)
-  
-    pygame.quit()
+                quit()
+
+
+    def _process_game_logic(self):
+        pass
+
+
+    def _rajz(self):
+        self.screen.fill((0, 0, 255))
+        pygame.display.flip()
