@@ -2,7 +2,7 @@ from game import Game
 
 def main() -> None:
     game: Game = Game()
-    game.main_loop()
+    game.run()
 
 
 if __name__ == "__main__":
