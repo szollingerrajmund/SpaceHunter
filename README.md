@@ -5,4 +5,4 @@
   ## Baracskai Dóra
 
 Játékünk rövid leírása:
-  Work In Progress
+  ### Work In Progress
