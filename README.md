@@ -4,5 +4,5 @@
   ## Szollinger Rajmund
   ## Baracskai Dóra
 
-#Játékünk rövid leírása:
+# Játékünk rövid leírása:
   Work In Progress
