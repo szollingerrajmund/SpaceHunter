@@ -9,7 +9,7 @@ class Game(object):
         self.screen:pygame.Surface = pygame.display.set_mode(self.screen_res)
         self.clock: pygame.time.Clock = pygame.time.Clock()
         pygame.display.set_caption("Space Hunters")
-        
+        self.run()
 
     def run(self):
         while True:
