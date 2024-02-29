@@ -1,18 +1,35 @@
 import pygame
 class Asteroid(object):
+    def __init__(self,x: int, y: int, velocity: float) -> None:
+        self.position: pygame.Vector2 = pygame.Vector2(x, y)
+        self.velocity: pygame.Vector2 = pygame.Vector2(velocity)
+        self.images: list[pygame.Surface] = []
+        self.images.append(pygame.image.load("Képek/Asteroid/1.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/2.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/3.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/4.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/5.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/6.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/7.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/8.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/9.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/10.png").convert_alpha())
+        self.frame:float= 0
+        self.changing: float = 0.25
+        self.image: pygame.Surface = self.images[self.frame]
 
-    pygame.init()
 
-    ast1 = pygame.image.load("1.png").convert_alpha
-    ast2 = pygame.image.load("2.png").convert_alpha
-    ast3 = pygame.image.load("3.png").convert_alpha
-    ast4 = pygame.image.load("4.png").convert_alpha
-    ast5 = pygame.image.load("5.png").convert_alpha
-    ast6 = pygame.image.load("6.png").convert_alpha
-    ast7 = pygame.image.load("7.png").convert_alpha
-    ast8 = pygame.image.load("8.png").convert_alpha
+    def draw(self, screen: pygame.Surface)-> None:
+        blit_position = self.image.get_rect(center = self.position)
+        screen.blit(self.image, blit_position)
+    
+    def update(self, screen:pygame.Surface)-> None:
+        self.animation()
+        self.draw(screen)
 
-    asteroid = [ast1,ast2,ast3,ast4,ast5,ast6,ast7,ast8]
-    asteroid_index = 0
-    asteroid_rect = asteroid[asteroid_index].get_rect(midleft =(240, 160))
+    def animation(self)->None:
+        self.frame+=self.changing
+        if self.frame>=len(self.images):
+            self.frame=0
+        self.image=self.images[int(self.frame)]
 
