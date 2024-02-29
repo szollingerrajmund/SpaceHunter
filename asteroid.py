@@ -15,7 +15,7 @@ class Asteroid(object):
         self.images.append(pygame.image.load("Képek/Asteroid/9.png").convert_alpha())
         self.images.append(pygame.image.load("Képek/Asteroid/10.png").convert_alpha())
         self.frame:float= 0
-        self.changing: float = 0.25
+        self.changing: float = 0.35
         self.image: pygame.Surface = self.images[self.frame]
 
 
