@@ -32,4 +32,3 @@ class Asteroid(object):
         if self.frame>=len(self.images):
             self.frame=0
         self.image=self.images[int(self.frame)]
-
