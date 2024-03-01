@@ -18,6 +18,7 @@ class Game(object):
     def run(self):
         while True:
             self._input_kezelés()
+            self._kezdőképernyő()
             self._draw()
             self.player.draw(self.screen)
             self.player.update(self.screen)
@@ -59,3 +60,26 @@ class Game(object):
         score_rect = score_text.get_rect(topleft=(WIDTH - 260, 10))
         
         self.screen.blit(score_text, score_rect)
+
+    def _kezdőképernyő(self):
+        game_state = "start_menu"
+
+        self.screen.fill((0, 0, 0))
+        font = pygame.font.SysFont('Trebuchet', 66)
+        title = font.render('Space Hunter', True, (255, 255, 255))
+        start_button = font.render('Start', True, (255, 255, 255))
+        self.screen.blit(title, (WIDTH/2 - title.get_width()/2, HEIGHT/2 - title.get_height()/2))
+        self.screen.blit(start_button, (WIDTH/2 - start_button.get_width()/2, HEIGHT/2 + start_button.get_height()/2))
+
+        while True: 
+            for event in pygame.event.get(): 
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+
+            if game_state == "start_menu":
+                draw_start_menu()
+
+            if game_state != "start_menu":
+                keys = pygame.key.get_pressed()
+                # rest of the code
