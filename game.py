@@ -39,7 +39,7 @@ class Game(object):
         self.screen.blit(Háttér,(0,0))
 
     def _idő(self):
-        game_font = pygame.font.SysFont("Trebuchet", 56)
+        game_font = pygame.font.SysFont("Trebuchet", 52)
         if not hasattr(self, "time_start"):
             self.time_start = time.time()
         game_time = str(int(time.time() - self.time_start))
@@ -54,8 +54,8 @@ class Game(object):
         obstacle = pygame.Rect(200, 200, 50, 50)
         if player.colliderect(obstacle):
             score += score_increment
-        font = pygame.font.Font('', 36)
-        score_text = font.render(f'Pontszám: {score}', True, (255, 255, 255))
-        score_rect = score_text.get_rect(topleft=(WIDTH - 210, 10))
+        game_font = pygame.font.SysFont("Trebuchet", 52)
+        score_text = game_font.render(f'Pontszám: {score}', True, (255, 255, 255))
+        score_rect = score_text.get_rect(topleft=(WIDTH - 260, 10))
         
         self.screen.blit(score_text, score_rect)
