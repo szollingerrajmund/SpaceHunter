@@ -19,12 +19,12 @@ class Game(object):
         while True:
             self._input_kezelés()
             self._draw()
-            
             self.player.draw(self.screen)
             self.player.update(self.screen)
             self.asteroid.draw(self.screen)
             self.asteroid.update(self.screen)
-            self.idő()
+            self._idő()
+            self._pontszámláló()
             pygame.display.update()
             self.clock.tick(FPS)
 
@@ -38,7 +38,7 @@ class Game(object):
         Háttér=pygame.transform.scale(Háttérkép,(WIDTH,HEIGHT))
         self.screen.blit(Háttér,(0,0))
 
-    def idő(self):
+    def _idő(self):
         game_font = pygame.font.SysFont("Trebuchet", 56)
         if not hasattr(self, "time_start"):
             self.time_start = time.time()
@@ -46,3 +46,16 @@ class Game(object):
         time_surf = game_font.render("Idő: " + game_time, True, (255, 255, 255))
         time_rect = time_surf.get_rect(topleft=(10, 10))
         self.screen.blit(time_surf, time_rect)
+
+    def _pontszámláló(self):
+        score = 0
+        score_increment = 1
+        player = pygame.Rect(100, 200, 50, 50)
+        obstacle = pygame.Rect(200, 200, 50, 50)
+        if player.colliderect(obstacle):
+            score += score_increment
+        font = pygame.font.Font(None, 36)
+        score_text = font.render(f'Pontszám: {score}', True, (255, 255, 255))
+        score_rect = score_text.get_rect(topleft=(WIDTH - 210, 10))
+        
+        self.screen.blit(score_text, score_rect)
