@@ -54,7 +54,7 @@ class Game(object):
         obstacle = pygame.Rect(200, 200, 50, 50)
         if player.colliderect(obstacle):
             score += score_increment
-        font = pygame.font.Font(None, 36)
+        font = pygame.font.Font('', 36)
         score_text = font.render(f'Pontszám: {score}', True, (255, 255, 255))
         score_rect = score_text.get_rect(topleft=(WIDTH - 210, 10))
         
