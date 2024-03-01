@@ -2,7 +2,7 @@ import pygame
 from settings import HEIGHT, WIDTH, FPS
 from asteroid import Asteroid
 from player import Player
-
+import time
 
 class Game(object):
     def __init__(self):
@@ -24,6 +24,7 @@ class Game(object):
             self.player.update(self.screen)
             self.asteroid.draw(self.screen)
             self.asteroid.update(self.screen)
+            self.idő()
             pygame.display.update()
             self.clock.tick(FPS)
 
@@ -36,3 +37,12 @@ class Game(object):
         Háttérkép = pygame.image.load("Képek/background.png")
         Háttér=pygame.transform.scale(Háttérkép,(WIDTH,HEIGHT))
         self.screen.blit(Háttér,(0,0))
+
+    def idő(self):
+        game_font = pygame.font.SysFont("Trebuchet", 56)
+        if not hasattr(self, "time_start"):
+            self.time_start = time.time()
+        game_time = str(int(time.time() - self.time_start))
+        time_surf = game_font.render("Idő: " + game_time, True, (255, 255, 255))
+        time_rect = time_surf.get_rect(topleft=(10, 10))
+        self.screen.blit(time_surf, time_rect)
