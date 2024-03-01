@@ -19,7 +19,6 @@ class Game(object):
         while True:
             self._input_kezelés()
             self._draw()
-            
             self.player.draw(self.screen)
             self.player.update(self.screen)
             self.asteroid.draw(self.screen)
