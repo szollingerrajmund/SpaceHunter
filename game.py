@@ -83,3 +83,23 @@ class Game(object):
             if game_state != "start_menu":
                 keys = pygame.key.get_pressed()
                 # rest of the code
+
+    def _draw_start_menu(self):
+        self.screen.fill((0, 0, 0))
+        font = pygame.font.SysFont('arial', 40)
+        title = font.render('My Game', True, (255, 255, 255))
+        start_button = font.render('Start', True, (255, 255, 255))
+        self.screen.blit(title, (WIDTH/2 - title.get_width()/2, HEIGHT/2 - title.get_height()/2))
+        self.screen.blit(start_button, (WIDTH/2 - start_button.get_width()/2, HEIGHT/2 + start_button.get_height()/2))
+        pygame.display.update()
+
+    def _draw_game_over_screen(self):
+        self.screen.fill((0, 0, 0))
+        font = pygame.font.SysFont('arial', 40)
+        title = font.render('Game Over', True, (255, 255, 255))
+        restart_button = font.render('R - Restart', True, (255, 255, 255))
+        quit_button = font.render('Q - Quit', True, (255, 255, 255))
+        self.screen.blit(title, (WIDTH/2 - title.get_width()/2, HEIGHT/2 - title.get_height()/3))
+        self.screen.blit(restart_button, (screen_width/2 - restart_button.get_width()/2, screen_height/1.9 + restart_button.get_height()))
+        self.screen.blit(quit_button, (screen_width/2 - quit_button.get_width()/2, screen_height/2 + quit_button.get_height()/2))
+        pygame.display.update()
