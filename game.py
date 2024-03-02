@@ -24,6 +24,7 @@ class Game(object):
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_SPACE]:
                     self.game_state = "game"
+
             elif self.game_state == "game":
                 self.game_over = False
                 self._draw()
@@ -33,6 +34,16 @@ class Game(object):
                 self.asteroid.update(self.screen)
                 self._time()
                 self._points()
+
+            elif self.game_state == "game_over":
+                self._game_over_menu()
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_r]:
+                    self.game_state = "start_menu"
+                if keys[pygame.K_q]:
+                    pygame.quit()
+                    quit()
+
             pygame.display.update()
             self.clock.tick(FPS)
 
@@ -70,9 +81,20 @@ class Game(object):
     
     def _start_menu(self):
         self.screen.fill((0, 0, 0))
-        font = pygame.font.SysFont('Trebuchet', 40)
+        font = pygame.font.SysFont('Trebuchet', 56)
         title = font.render('Space Hunter', True, (255, 255, 255))
-        start_button = font.render('Start', True, (255, 255, 255))
+        start_button = font.render('Press space to start', True, (255, 255, 255))
         self.screen.blit(title, (WIDTH/2 - title.get_width()/2, HEIGHT/2 - title.get_height()/2))
         self.screen.blit(start_button, (WIDTH/2 - start_button.get_width()/2, HEIGHT/2 + start_button.get_height()/2))
+        pygame.display.update()
+
+    def _game_over_menu(self):
+        self.screen.fill((0, 0, 0))
+        font = pygame.font.SysFont('Trebuchet', 56)
+        title = font.render('Game Over', True, (255, 255, 255))
+        restart_button = font.render('R - Restart', True, (255, 255, 255))
+        quit_button = font.render('Q - Quit', True, (255, 255, 255))
+        self.screen.blit(title, (WIDTH/2 - title.get_width()/2, HEIGHT/2 - title.get_height()/3))
+        self.screen.blit(restart_button, (WIDTH/2 - restart_button.get_width()/2, HEIGHT/1.9 + restart_button.get_height()))
+        self.screen.blit(quit_button, (WIDTH/2 - quit_button.get_width()/2, HEIGHT/2 + quit_button.get_height()/2))
         pygame.display.update()
