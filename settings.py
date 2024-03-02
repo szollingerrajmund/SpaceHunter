@@ -1,3 +1,3 @@
-WIDTH:int=1600
-HEIGHT:int=800
+WIDTH:int=1200
+HEIGHT:int=600
 FPS:int=60
