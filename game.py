@@ -19,7 +19,6 @@ class Game(object):
         while True:
             self._input_kezelés()
             self._draw()
-            self.player.draw(self.screen)
             self.player.update(self.screen)
             self.asteroid.draw(self.screen)
             self.asteroid.update(self.screen)
@@ -37,6 +36,9 @@ class Game(object):
             self.player.rotate(clockwise=True)
         elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.player.rotate(clockwise=False)
+        elif keys[pygame.K_UP] or keys[pygame.K_w]:
+            self.player.speed_up()
+
 
 
     def _draw(self):
