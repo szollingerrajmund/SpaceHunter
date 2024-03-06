@@ -49,18 +49,18 @@ class Game(object):
             self.clock.tick(FPS)
 
     def _input_kezelés(self):
+        keys = pygame.key.get_pressed()
         for event in pygame.event.get():
-            keys = pygame.key.get_pressed()
             if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
-                if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-                    self.player.rotate(clockwise=True)
-                elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
-                    self.player.rotate(clockwise=False)
-                elif keys[pygame.K_UP] or keys[pygame.K_w]:
-                    self.player.speed_up()
-                elif event.type == pygame.QUIT:
+                if event.type == pygame.QUIT:
                     quit()
 
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+            self.player.rotate(clockwise=True)
+        elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
+                self.player.rotate(clockwise=False)
+        elif keys[pygame.K_UP] or keys[pygame.K_w]:
+            self.player.speed_up()
 
 
     def _draw(self):
