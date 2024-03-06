@@ -1,10 +1,13 @@
+from ctypes.wintypes import RGB
 import pygame
+from settings import MANEUVERABILITY, UP, SPEED
 
 
 class Player:
-    def __init__(self, x: int, y: int, velocity: float) -> None:
+    def __init__(self, x: int, y: int, velocity: pygame.Vector2) -> None:
         self.position: pygame.Vector2 = pygame.Vector2(x, y)
         self.velocity: pygame.Vector2 = pygame.Vector2(velocity)
+        self.direction: pygame.Vector2 = pygame.Vector2(UP)
         self.images: list[pygame.Surface] = []
         self.images.append(pygame.image.load("Képek/player-0.png").convert_alpha())
         self.images.append(pygame.image.load("Képek/player-1.png").convert_alpha())
@@ -13,18 +16,35 @@ class Player:
         self.images.append(pygame.image.load("Képek/player-4.png").convert_alpha())
         self.frame: float = 0
         self.changing: float = 0.2
-        self.image:pygame.Surface=pygame.transform.scale(self.images[self.frame],(50,50))
+        self.image: pygame.Surface = self.images[self.frame]
+
+    def rotate(self, clockwise: bool = True):
+        turn = 1 if clockwise else -1
+        angle = MANEUVERABILITY * turn
+        self.direction.rotate_ip(angle)
 
     def draw(self, screen: pygame.Surface) -> None:
-        blit_position = self.image.get_rect(center=self.position)
-        screen.blit(self.image, blit_position)
+        angle = self.direction.angle_to(UP)
+        rotated_image: pygame.Surface = pygame.transform.rotate(self.image, angle)
+        rotated_rect: pygame.Rect = rotated_image.get_rect(
+            center=self.image.get_rect(center=self.position).center
+        )
+        screen.blit(rotated_image, rotated_rect)
+        pygame.draw.rect(screen, RGB(0, 0, 255), rotated_rect, 3)
 
     def update(self, screen: pygame.Surface) -> None:
         self.animation()
+        self.move()
         self.draw(screen)
 
     def animation(self) -> None:
         self.frame += self.changing
         if self.frame >= len(self.images):
             self.frame = 0
-        self.image = self.images[int(self.frame)]
+        self.image = pygame.transform.scale(self.images[int(self.frame)], (100, 100))
+
+    def move(self):
+        self.position = self.position + self.velocity
+
+    def speed_up(self):
+        self.velocity += self.direction * SPEED
