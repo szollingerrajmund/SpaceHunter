@@ -40,7 +40,6 @@ class Game(object):
                 if keys[pygame.K_r]:
                     self.game_state = "start_menu"
                 if keys[pygame.K_k]:
-                    pygame.quit()
                     quit()
 
             pygame.display.update()
@@ -50,7 +49,6 @@ class Game(object):
         keys = pygame.key.get_pressed()
         for event in pygame.event.get():
             if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
-                if event.type == pygame.QUIT:
                     quit()
 
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
