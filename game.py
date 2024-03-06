@@ -40,7 +40,7 @@ class Game(object):
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_r]:
                     self.game_state = "start_menu"
-                if keys[pygame.K_q]:
+                if keys[pygame.K_k]:
                     pygame.quit()
                     quit()
 
@@ -81,10 +81,11 @@ class Game(object):
     
     def _start_menu(self):
         self.screen.fill((0, 0, 0))
-        font = pygame.font.SysFont('Trebuchet', 56)
+        font = pygame.font.SysFont('Trebuchet', 58)
+        font2 = pygame.font.SysFont('Trebuchet', 36)
         title = font.render('Space Hunter', True, (255, 255, 255))
-        start_button = font.render('Press space to start', True, (255, 255, 255))
-        self.screen.blit(title, (WIDTH/2 - title.get_width()/2, HEIGHT/2 - title.get_height()/2))
+        start_button = font2.render('Nyomd meg a szóközt, hogy elinduljon a játék', True, (255, 255, 255))
+        self.screen.blit(title, (WIDTH/2 - title.get_width()/2, HEIGHT/2 - title.get_height()))
         self.screen.blit(start_button, (WIDTH/2 - start_button.get_width()/2, HEIGHT/2 + start_button.get_height()/2))
         pygame.display.update()
 
@@ -92,8 +93,8 @@ class Game(object):
         self.screen.fill((0, 0, 0))
         font = pygame.font.SysFont('Trebuchet', 56)
         title = font.render('Game Over', True, (255, 255, 255))
-        restart_button = font.render('R - Restart', True, (255, 255, 255))
-        quit_button = font.render('Q - Quit', True, (255, 255, 255))
+        restart_button = font.render('R - Újra', True, (255, 255, 255))
+        quit_button = font.render('K - Kilépés', True, (255, 255, 255))
         self.screen.blit(title, (WIDTH/2 - title.get_width()/2, HEIGHT/2 - title.get_height()/3))
         self.screen.blit(restart_button, (WIDTH/2 - restart_button.get_width()/2, HEIGHT/1.9 + restart_button.get_height()))
         self.screen.blit(quit_button, (WIDTH/2 - quit_button.get_width()/2, HEIGHT/2 + quit_button.get_height()/2))
