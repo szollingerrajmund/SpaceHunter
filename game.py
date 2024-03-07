@@ -100,7 +100,7 @@ class Game(object):
         Háttérkép = pygame.image.load("Képek/background.png")
         Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
         self.screen.blit(Háttér, (0, 0))
-        font = pygame.font.SysFont("Trebuchet", 120)
+        font = pygame.font.SysFont("Trebuchet", 186)
         font2 = pygame.font.SysFont("Trebuchet", 50)
         title = font.render("Space Hunter", True, (255, 255, 255))
         start_button = font2.render(
