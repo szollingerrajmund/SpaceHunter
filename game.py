@@ -134,6 +134,7 @@ class Game(object):
         font2 = pygame.font.SysFont("Trebuchet", 50)
         font3 = pygame.font.SysFont("Trebuchet", 54)
         title = font.render("Segítség a játékhoz", True, (255, 255, 255))
+        # Átírni a szöveget a lentben!!!!
         restart_button = font2.render("R - Újra", True, (255, 255, 255))
         quit_button = font3.render(
             "Nyomd meg a szóközt a játék elindításához", True, (255, 255, 255)
@@ -175,7 +176,7 @@ class Game(object):
             restart_button,
             (
                 WIDTH / 2 - restart_button.get_width() / 2,
-                HEIGHT / 2 - restart_button.get_height() * 1.5,
+                HEIGHT / 2 - restart_button.get_height(),
             ),
         )
         self.screen.blit(
@@ -186,5 +187,3 @@ class Game(object):
             ),
         )
         pygame.display.update()
-
-
