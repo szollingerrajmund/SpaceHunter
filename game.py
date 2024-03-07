@@ -126,35 +126,6 @@ class Game(object):
         )
         pygame.display.update()
 
-    def _game_over_menu(self):
-        Háttérkép = pygame.image.load("Képek/background.png")
-        Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
-        self.screen.blit(Háttér, (0, 0))
-        font = pygame.font.SysFont("Trebuchet", 130)
-        font2 = pygame.font.SysFont("Trebuchet", 90)
-        title = font.render("Játék Vége", True, (255, 255, 255))
-        restart_button = font2.render("R - Újra", True, (255, 255, 255))
-        quit_button = font2.render("K - Kilépés", True, (255, 255, 255))
-        self.screen.blit(
-            title,
-            (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height() * 4),
-        )
-        self.screen.blit(
-            restart_button,
-            (
-                WIDTH / 2 - restart_button.get_width() / 2,
-                HEIGHT / 2 - restart_button.get_height() * 1.5,
-            ),
-        )
-        self.screen.blit(
-            quit_button,
-            (
-                WIDTH / 2 - quit_button.get_width() / 2,
-                HEIGHT / 2 + quit_button.get_height() / 5,
-            ),
-        )
-        pygame.display.update()
-
     def _help_menu(self):
         Háttérkép = pygame.image.load("Képek/background.png")
         Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
@@ -186,3 +157,34 @@ class Game(object):
             ),
         )
         pygame.display.update()
+
+    def _game_over_menu(self):
+        Háttérkép = pygame.image.load("Képek/background.png")
+        Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
+        self.screen.blit(Háttér, (0, 0))
+        font = pygame.font.SysFont("Trebuchet", 130)
+        font2 = pygame.font.SysFont("Trebuchet", 90)
+        title = font.render("Játék Vége", True, (255, 255, 255))
+        restart_button = font2.render("R - Újra", True, (255, 255, 255))
+        quit_button = font2.render("K - Kilépés", True, (255, 255, 255))
+        self.screen.blit(
+            title,
+            (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height() * 4),
+        )
+        self.screen.blit(
+            restart_button,
+            (
+                WIDTH / 2 - restart_button.get_width() / 2,
+                HEIGHT / 2 - restart_button.get_height() * 1.5,
+            ),
+        )
+        self.screen.blit(
+            quit_button,
+            (
+                WIDTH / 2 - quit_button.get_width() / 2,
+                HEIGHT / 2 + quit_button.get_height() / 5,
+            ),
+        )
+        pygame.display.update()
+
+
