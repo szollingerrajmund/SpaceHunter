@@ -16,6 +16,7 @@ class Player:
         self.images.append(pygame.image.load("Képek/player-4.png").convert_alpha())
         self.frame: float = 0
         self.changing: float = 0.2
+        self.standing_image:pygame.Surface=pygame.image.load("Képek/player_stand.png").convert_alpha()
         self.image: pygame.Surface = self.images[self.frame]
 
     def rotate(self, clockwise: bool = True):
@@ -26,9 +27,7 @@ class Player:
     def draw(self, screen: pygame.Surface) -> None:
         angle = self.direction.angle_to(UP)
         rotated_image: pygame.Surface = pygame.transform.rotate(self.image, angle)
-        rotated_rect: pygame.Rect = rotated_image.get_rect(
-            center=self.image.get_rect(center=self.position).center
-        )
+        rotated_rect: pygame.Rect = rotated_image.get_rect(center=self.image.get_rect(center=self.position).center)
         screen.blit(rotated_image, rotated_rect)
         pygame.draw.rect(screen, RGB(0, 0, 255), rotated_rect, 3)
 
