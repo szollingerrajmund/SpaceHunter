@@ -42,7 +42,6 @@ class Game(object):
                 self.game_over = False
                 self._draw()
                 self.player.update(self.screen)
-                self.asteroid.draw(self.screen)
                 self.asteroid.update(self.screen)
                 self._time()
                 self._points()

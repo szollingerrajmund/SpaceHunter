@@ -16,6 +16,8 @@ class Player:
         self.images.append(pygame.image.load("Képek/player-4.png").convert_alpha())
         self.frame: float = 0
         self.changing: float = 0.2
+        self.fly:bool=True
+        self.standing_image:pygame.Surface=pygame.image.load("Képek/player_stand.png").convert_alpha()
         self.image: pygame.Surface = self.images[self.frame]
 
     def rotate(self, clockwise: bool = True):
@@ -36,13 +38,18 @@ class Player:
         self.draw(screen)
 
     def animation(self) -> None:
-        self.frame += self.changing
-        if self.frame >= len(self.images):
-            self.frame = 0
-        self.image = pygame.transform.scale(self.images[int(self.frame)], (100, 100))
+        if self.fly:
+            self.frame += self.changing
+            if self.frame >= len(self.images):
+                self.frame = 0
+            self.image = pygame.transform.scale(self.images[int(self.frame)], (100, 100))
+        else:
+            self.image=pygame.transform.scale(self.standing_image, (100,100))
+        self.fly=False
 
     def move(self):
         self.position = self.position + self.velocity
 
     def speed_up(self):
         self.velocity += self.direction * SPEED
+        self.fly=True
