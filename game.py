@@ -2,8 +2,8 @@ import pygame
 from settings import HEIGHT, WIDTH, FPS
 from asteroid import Asteroid
 from player import Player
-import time
-from Menu import Menu
+from ido import Ido
+from menu import Menu
 
 
 class Game(object):
@@ -18,6 +18,7 @@ class Game(object):
         self.asteroid: Asteroid = Asteroid(800, 600, 10)
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
+        self.ido: Ido = Ido()
         pygame.display.set_caption("Space Hunters")
         self.run()
 
@@ -44,8 +45,8 @@ class Game(object):
                 self.player.update(self.screen)
                 self.asteroid.draw(self.screen)
                 self.asteroid.update(self.screen)
-                self._time()
-                self._points()
+                self.ido.time()
+                self.ido.points()
 
             elif self.game_state == "game_over":
                 self.menu.game_over_menu()
@@ -75,25 +76,3 @@ class Game(object):
         Háttérkép = pygame.image.load("Képek/background.png")
         Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
         self.screen.blit(Háttér, (0, 0))
-
-    def _time(self):
-        game_font = pygame.font.SysFont("Trebuchet", 52)
-        if not hasattr(self, "time_start"):
-            self.time_start = time.time()
-        game_time = str(int(time.time() - self.time_start))
-        time_surf = game_font.render("Idő: " + game_time, True, (255, 255, 255))
-        time_rect = time_surf.get_rect(topleft=(10, 10))
-        self.screen.blit(time_surf, time_rect)
-
-    def _points(self):
-        score = 0
-        score_increment = 1
-        player = pygame.Rect(100, 200, 50, 50)
-        obstacle = pygame.Rect(200, 200, 50, 50)
-        if player.colliderect(obstacle):
-            score += score_increment
-        game_font = pygame.font.SysFont("Trebuchet", 52)
-        score_text = game_font.render(f"Pontszám: {score}", True, (255, 255, 255))
-        score_rect = score_text.get_rect(topleft=(WIDTH - 260, 10))
-
-        self.screen.blit(score_text, score_rect)
