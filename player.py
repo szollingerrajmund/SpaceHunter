@@ -24,17 +24,22 @@ class Player:
         angle = MANEUVERABILITY * turn
         self.direction.rotate_ip(angle)
 
-    def draw(self, screen: pygame.Surface) -> None:
+    def draw(self, screen: pygame.Surface, flying:bool) -> None:
         angle = self.direction.angle_to(UP)
-        rotated_image: pygame.Surface = pygame.transform.rotate(self.image, angle)
-        rotated_rect: pygame.Rect = rotated_image.get_rect(center=self.image.get_rect(center=self.position).center)
-        screen.blit(rotated_image, rotated_rect)
+        if flying:
+            rotated_image: pygame.Surface = pygame.transform.rotate(self.image, angle)
+            rotated_rect: pygame.Rect = rotated_image.get_rect(center=self.image.get_rect(center=self.position).center)
+            screen.blit(rotated_image, rotated_rect)
+        else:
+            rotated_image: pygame.Surface = pygame.transform.rotate(self.standing_image, angle)
+            rotated_rect: pygame.Rect = rotated_image.get_rect(center=self.standing_image.get_rect(center=self.position).center)
+            screen.blit(rotated_image, rotated_rect)
         pygame.draw.rect(screen, RGB(0, 0, 255), rotated_rect, 3)
 
-    def update(self, screen: pygame.Surface) -> None:
+    def update(self, screen: pygame.Surface , flying:bool) -> None:
         self.animation()
         self.move()
-        self.draw(screen)
+        self.draw(screen, flying)
 
     def animation(self) -> None:
         self.frame += self.changing
