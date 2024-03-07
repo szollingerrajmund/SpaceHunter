@@ -26,7 +26,7 @@ class Game(object):
                 self._start_menu()
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_SPACE]:
-                    self.game_state = "game_over"
+                    self.game_state = "game"
                 elif keys[pygame.K_s]:
                     self.game_state = "help"
 
