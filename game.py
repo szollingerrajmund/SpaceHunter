@@ -17,6 +17,7 @@ class Game(object):
         )
         self.asteroid: Asteroid = Asteroid(800, 600, 10)
         self.game_state = "start_menu"
+        self.menu: Menu = Menu()
         pygame.display.set_caption("Space Hunters")
         self.run()
 
@@ -24,7 +25,7 @@ class Game(object):
         while True:
             self._input_kezelés()
             if self.game_state == "start_menu":
-                Menu.start_menu(self)
+                self.menu.start_menu()
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_SPACE]:
                     self.game_state = "game"
@@ -32,7 +33,7 @@ class Game(object):
                     self.game_state = "help"
 
             elif self.game_state == "help":
-                Menu.help_menu(self)
+                self.menu.help_menu()
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_SPACE]:
                     self.game_state = "game"
@@ -47,7 +48,7 @@ class Game(object):
                 self._points()
 
             elif self.game_state == "game_over":
-                Menu.game_over_menu(self)
+                self.menu.game_over_menu()
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_r]:
                     self.game_state = "start_menu"
