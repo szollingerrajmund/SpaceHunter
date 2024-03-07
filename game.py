@@ -23,6 +23,14 @@ class Game(object):
                 self._start_menu()
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_SPACE]:
+                    self.game_state = "game_over"
+                elif keys[pygame.K_j]:
+                    self.game_state = "help"
+            
+            elif self.game_state == "help":
+                self._help_menu()
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_SPACE]:
                     self.game_state = "game"
 
             elif self.game_state == "game":
@@ -87,21 +95,40 @@ class Game(object):
         self.screen.blit(score_text, score_rect)
     
     def _start_menu(self):
-        self.screen.fill((0, 0, 0))
-        font = pygame.font.SysFont('Trebuchet', 58)
-        font2 = pygame.font.SysFont('Trebuchet', 36)
+        Háttérkép = pygame.image.load("Képek/background.png")
+        Háttér = pygame.transform.scale(Háttérkép,(WIDTH,HEIGHT))
+        self.screen.blit(Háttér,(0,0))
+        font = pygame.font.SysFont('Trebuchet', 120)
+        font2 = pygame.font.SysFont('Trebuchet', 50)
         title = font.render('Space Hunter', True, (255, 255, 255))
-        start_button = font2.render('Nyomd meg a szóközt, hogy elinduljon a játék', True, (255, 255, 255))
+        start_button = font2.render('Nyomd meg a szóközt a játék elindulításához', True, (255, 255, 255))
+        help_button = font2.render('J - A játék leírása', True, (255, 255, 255))
         self.screen.blit(title, (WIDTH/2 - title.get_width()/2, HEIGHT/2 - title.get_height()))
         self.screen.blit(start_button, (WIDTH/2 - start_button.get_width()/2, HEIGHT/2 + start_button.get_height()/2))
+        self.screen.blit(help_button, (WIDTH/2 - help_button.get_width()/2, HEIGHT/2 + help_button.get_height()*2))
         pygame.display.update()
 
     def _game_over_menu(self):
-        self.screen.fill((0, 0, 0))
+        Háttérkép = pygame.image.load("Képek/background.png")
+        Háttér = pygame.transform.scale(Háttérkép,(WIDTH,HEIGHT))
+        self.screen.blit(Háttér,(0,0))
         font = pygame.font.SysFont('Trebuchet', 56)
         title = font.render('Game Over', True, (255, 255, 255))
         restart_button = font.render('R - Újra', True, (255, 255, 255))
         quit_button = font.render('K - Kilépés', True, (255, 255, 255))
+        self.screen.blit(title, (WIDTH/2 - title.get_width()/2, HEIGHT/2 - title.get_height()/3))
+        self.screen.blit(restart_button, (WIDTH/2 - restart_button.get_width()/2, HEIGHT/1.9 + restart_button.get_height()))
+        self.screen.blit(quit_button, (WIDTH/2 - quit_button.get_width()/2, HEIGHT/2 + quit_button.get_height()/2))
+        pygame.display.update()
+    
+    def _help_menu(self):
+        Háttérkép = pygame.image.load("Képek/background.png")
+        Háttér = pygame.transform.scale(Háttérkép,(WIDTH,HEIGHT))
+        self.screen.blit(Háttér,(0,0))
+        font = pygame.font.SysFont('Trebuchet', 56)
+        title = font.render('Segítség', True, (255, 255, 255))
+        restart_button = font.render('R - Újra', True, (255, 255, 255))
+        quit_button = font.render('Nyomd meg a szóközt a játék elindulításához', True, (255, 255, 255))
         self.screen.blit(title, (WIDTH/2 - title.get_width()/2, HEIGHT/2 - title.get_height()/3))
         self.screen.blit(restart_button, (WIDTH/2 - restart_button.get_width()/2, HEIGHT/1.9 + restart_button.get_height()))
         self.screen.blit(quit_button, (WIDTH/2 - quit_button.get_width()/2, HEIGHT/2 + quit_button.get_height()/2))
