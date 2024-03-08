@@ -15,9 +15,9 @@ class Menu(object):
         font2 = pygame.font.SysFont("Trebuchet", 50)
         title = font.render("Space Hunter", True, (255, 255, 255))
         start_button = font2.render(
-            "Nyomd meg a szóközt a játék elindításához", True, (255, 255, 255)
+            "Nyomd meg az ENTER-t a játék elindításához", True, (255, 255, 255)
         )
-        help_button = font2.render("S - Segítség", True, (255, 255, 255))
+        help_button = font2.render("H - Segítség", True, (255, 255, 255))
         self.screen.blit(
             title, (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height())
         )
@@ -48,7 +48,7 @@ class Menu(object):
         # Átírni a szöveget a lentben!!!!
         restart_button = font2.render("R - Újra", True, (255, 255, 255))
         quit_button = font3.render(
-            "Nyomd meg a szóközt a játék elindításához", True, (255, 255, 255)
+            "Nyomd meg az ENTER-t a játék elindításához", True, (255, 255, 255)
         )
         self.screen.blit(
             title,

@@ -25,15 +25,15 @@ class Game(object):
             if self.game_state == "start_menu":
                 self.menu.start_menu()
                 keys = pygame.key.get_pressed()
-                if keys[pygame.K_SPACE]:
+                if keys[pygame.K_RETURN]:
                     self.game_state = "game"
-                elif keys[pygame.K_s]:
+                elif keys[pygame.K_h]:
                     self.game_state = "help"
 
             elif self.game_state == "help":
                 self.menu.help_menu()
                 keys = pygame.key.get_pressed()
-                if keys[pygame.K_SPACE]:
+                if keys[pygame.K_RETURN]:
                     self.game_state = "game"
 
             elif self.game_state == "game":
