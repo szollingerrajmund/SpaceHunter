@@ -5,17 +5,13 @@ from player import Player
 from ido import Ido
 from Menu import Menu
 
-
-
 class Game(object):
     def __init__(self):
         pygame.init()
         self.screen_res: tuple[int, int] = (WIDTH, HEIGHT)
         self.screen: pygame.Surface = pygame.display.set_mode(self.screen_res)
         self.clock: pygame.time.Clock = pygame.time.Clock()
-        self.player: Player = Player(
-            self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0)
-        )
+        self.player: Player = Player(self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0))
         self.asteroid: Asteroid = Asteroid(800, 600, 10)
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
@@ -64,7 +60,6 @@ class Game(object):
         for event in pygame.event.get():
             if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
                 quit()
-
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.player.rotate(clockwise=True)
         elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
