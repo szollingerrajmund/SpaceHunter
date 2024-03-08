@@ -6,6 +6,7 @@ from ido import Ido
 from menu import Menu
 
 
+
 class Game(object):
     def __init__(self):
         pygame.init()
