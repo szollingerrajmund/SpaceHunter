@@ -29,6 +29,7 @@ class Player:
         angle = self.direction.angle_to(UP)
         rotated_image: pygame.Surface = pygame.transform.rotate(self.image, angle)
         rotated_rect: pygame.Rect = rotated_image.get_rect(center=self.image.get_rect(center=self.position).center)
+        rotated_rect.top=rotated_rect.bottom
         screen.blit(rotated_image, rotated_rect)
         pygame.draw.rect(screen, RGB(0, 0, 255), rotated_rect, 3)
 
@@ -54,3 +55,4 @@ class Player:
         self.velocity += self.direction * SPEED
         self.velocity=self.velocity.clamp_magnitude(MAX_SPEED)
         self.fly=True
+
