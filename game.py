@@ -3,9 +3,7 @@ from settings import HEIGHT, WIDTH, FPS
 from asteroid import Asteroid
 from player import Player
 from ido import Ido
-from menu import Menu
-
-
+from Menu import Menu
 
 class Game(object):
     def __init__(self):
@@ -64,7 +62,6 @@ class Game(object):
         for event in pygame.event.get():
             if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
                 quit()
-
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.player.rotate(clockwise=True)
         elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
