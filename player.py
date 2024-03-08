@@ -1,6 +1,6 @@
 from ctypes.wintypes import RGB
 import pygame
-from settings import MANEUVERABILITY, UP, SPEED
+from settings import MANEUVERABILITY, UP, SPEED,MAX_SPEED
 
 
 class Player:
@@ -52,4 +52,5 @@ class Player:
 
     def speed_up(self):
         self.velocity += self.direction * SPEED
+        self.velocity=self.velocity.clamp_magnitude(MAX_SPEED)
         self.fly=True
