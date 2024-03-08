@@ -30,7 +30,7 @@ class Game(object):
                 self.menu.start_menu()
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_RETURN]:
-                    self.game_state = "game"
+                    self.game_state = "game_over"
                 elif keys[pygame.K_h]:
                     self.game_state = "help"
 
