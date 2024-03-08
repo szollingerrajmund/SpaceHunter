@@ -41,31 +41,31 @@ class Menu(object):
         Háttérkép = pygame.image.load("Képek/background.png")
         Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
         self.screen.blit(Háttér, (0, 0))
-        font = pygame.font.SysFont("Trebuchet", 120)
-        font2 = pygame.font.SysFont("Trebuchet", 50)
+        font = pygame.font.SysFont("Trebuchet", 110)
+        font2 = pygame.font.SysFont("Trebuchet", 46)
         font3 = pygame.font.SysFont("Trebuchet", 54)
         title = font.render("Segítség a játékhoz", True, (255, 255, 255))
         # Átírni a szöveget a lentben!!!!
-        restart_button = font2.render("R - Újra", True, (255, 255, 255))
-        quit_button = font3.render(
+        describe_game = font2.render("A különböző nyilakkal mozoghatsz", True, (255, 255, 255))
+        start_button = font3.render(
             "Nyomd meg az ENTER-t a játék elindításához", True, (255, 255, 255)
         )
         self.screen.blit(
             title,
-            (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height() * 4),
+            (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height() * 5),
         )
         self.screen.blit(
-            restart_button,
+            describe_game,
             (
-                WIDTH / 2 - restart_button.get_width() / 2,
-                HEIGHT / 2 - restart_button.get_height(),
+                WIDTH / 2 -describe_game.get_width() / 2,
+                HEIGHT / 2 - describe_game.get_height(),
             ),
         )
         self.screen.blit(
-            quit_button,
+            start_button,
             (
-                WIDTH / 2 - quit_button.get_width() / 2,
-                HEIGHT / 2 + quit_button.get_height() * 8,
+                WIDTH / 2 - start_button.get_width() / 2,
+                HEIGHT / 2 + start_button.get_height() * 9,
             ),
         )
         pygame.display.update()
