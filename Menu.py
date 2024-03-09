@@ -118,7 +118,7 @@ class Menu(object):
         Háttérkép = pygame.image.load("Képek/background.png")
         Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
         self.screen.blit(Háttér, (0, 0))
-        font = pygame.font.SysFont("Trebuchet", 130)
+        font = pygame.font.SysFont("Trebuchet", 140)
         font2 = pygame.font.SysFont("Trebuchet", 80)
         font3 = pygame.font.SysFont("Trebuchet", 60)
         title = font.render("Játék Vége", True, (255, 255, 255))
@@ -130,7 +130,7 @@ class Menu(object):
         maker3 = font3.render("Baracskai Dóra", True, (255, 255, 255))
         self.screen.blit(
             title,
-            (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height() * 4),
+            (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height() * 3.8),
         )
         self.screen.blit(
             restart_button,
