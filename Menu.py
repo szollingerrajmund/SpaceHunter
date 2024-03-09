@@ -1,7 +1,6 @@
 import pygame
 from settings import HEIGHT, WIDTH
 
-
 class Menu(object):
     def __init__(self):
         pygame.init()
@@ -11,7 +10,11 @@ class Menu(object):
     def start_menu(self):
         Háttérkép = pygame.image.load("Képek/background.png")
         Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
-        self.screen.blit(Háttér, (0, 0))
+
+        # Create a copy of the background with alpha channel
+        background_with_alpha = Háttér.convert_alpha()
+
+        # Text rendering
         font = pygame.font.SysFont("Trebuchet", 186)
         font2 = pygame.font.SysFont("Trebuchet", 50)
         title = font.render("Space Hunter", True, (255, 255, 255))
@@ -19,6 +22,44 @@ class Menu(object):
             "Nyomd meg az ENTER-t a játék elindításához", True, (255, 255, 255)
         )
         help_button = font2.render("H - Segítség", True, (255, 255, 255))
+
+        # Gradually increase the visibility of texts
+        for alpha in range(0, 256, 4):
+            # Display the background
+            self.screen.blit(background_with_alpha, (0, 0))
+            
+            # Blit texts with varying alpha values
+            title_with_alpha = title.copy()
+            title_with_alpha.set_alpha(alpha)
+            start_button_with_alpha = start_button.copy()
+            start_button_with_alpha.set_alpha(alpha)
+            help_button_with_alpha = help_button.copy()
+            help_button_with_alpha.set_alpha(alpha)
+
+            # Blit texts to the screen
+            self.screen.blit(
+                title_with_alpha, (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height())
+            )
+            self.screen.blit(
+                start_button_with_alpha,
+                (
+                    WIDTH / 2 - start_button.get_width() / 2,
+                    HEIGHT / 2 + start_button.get_height() / 2,
+                ),
+            )
+            self.screen.blit(
+                help_button_with_alpha,
+                (
+                    WIDTH / 2 - help_button.get_width() / 2,
+                    HEIGHT / 2 + help_button.get_height() * 2,
+                ),
+            )
+
+            # Update display
+            pygame.display.update()
+            # Add a delay for smooth transition
+
+        # Display fully opaque texts
         self.screen.blit(
             title, (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height())
         )
@@ -105,7 +146,6 @@ class Menu(object):
                 HEIGHT / 2 - quit_button.get_height() * 2,
             ),
         )
-
         self.screen.blit(
             makers,
             (
