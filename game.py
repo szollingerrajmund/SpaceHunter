@@ -4,6 +4,7 @@ from asteroid import Asteroid
 from player import Player
 from ido import Ido
 from menu import Menu
+from fomenu import Kezdo
 
 
 
@@ -20,12 +21,19 @@ class Game(object):
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
         self.ido: Ido = Ido()
+        self.kezdo: Kezdo = Kezdo(0, HEIGHT // 2)
         pygame.display.set_caption("Space Hunters")
         self.run()
 
     def run(self):
+        animation_started = False
         while True:
             self._input_kezelés()
+
+            if not animation_started:
+                self.kezdo.mozog()
+                animation_started = True
+
             if self.game_state == "start_menu":
                 self.menu.start_menu()
                 keys = pygame.key.get_pressed()
