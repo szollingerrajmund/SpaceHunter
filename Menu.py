@@ -24,7 +24,7 @@ class Menu(object):
         help_button = font2.render("H - Segítség", True, (255, 255, 255))
 
         # Gradually increase the visibility of texts
-        for alpha in range(0, 256, 4):
+        for alpha in range(0, 256, 2):
             # Display the background
             self.screen.blit(background_with_alpha, (0, 0))
             
