@@ -55,3 +55,9 @@ class Player:
         self.velocity=self.velocity.clamp_magnitude(MAX_SPEED)
         self.fly=True
 
+    def collision(self, screen:pygame.Surface, rotated_rect:pygame.Rect)->bool:
+        window_rect:pygame.Rect=screen.get_rect()
+        if not window_rect.contains(rotated_rect):
+            return True
+        else:
+            return False
