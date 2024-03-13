@@ -3,7 +3,6 @@ from settings import HEIGHT, WIDTH, FPS
 from asteroid import Asteroid
 from player import Player
 from ido import Ido
-from Menu import Menu
 
 class Game(object):
     def __init__(self):
@@ -16,17 +15,31 @@ class Game(object):
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
         self.ido: Ido = Ido()
+        self.kezdo: Kezdo = Kezdo(0, HEIGHT // 2)
         pygame.display.set_caption("Space Hunters")
         self.run()
 
     def run(self):
+        animation_started = False
+        self.menu_started = False  # Flag to track if menu has been drawn
+
         while True:
             self._input_kezelés()
-            if self.game_state == "start_menu":
+
+            if not animation_started:
+                self.kezdo.mozog()
+                animation_started = True
+
+            if self.game_state == "start_menu" and not self.menu_started:
                 self.menu.start_menu()
+                self.menu_started = True
+            elif self.game_state != "start_menu":
+                self.menu_started = False
+
+            if self.game_state == "start_menu":
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_RETURN]:
-                    self.game_state = "game"
+                    self.game_state = "game_over"
                 elif keys[pygame.K_h]:
                     self.game_state = "help"
 
