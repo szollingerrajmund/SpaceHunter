@@ -1,6 +1,7 @@
 import pygame
 from settings import HEIGHT, WIDTH
 
+
 class Menu(object):
     def __init__(self):
         pygame.init()
@@ -27,7 +28,7 @@ class Menu(object):
         for alpha in range(0, 256):
             # Display the background
             self.screen.blit(background_with_alpha, (0, 0))
-            
+
             # Blit texts with varying alpha values
             title_with_alpha = title.copy()
             title_with_alpha.set_alpha(alpha)
@@ -38,7 +39,8 @@ class Menu(object):
 
             # Blit texts to the screen
             self.screen.blit(
-                title_with_alpha, (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height())
+                title_with_alpha,
+                (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height()),
             )
             self.screen.blit(
                 start_button_with_alpha,

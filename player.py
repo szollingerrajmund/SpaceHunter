@@ -1,6 +1,6 @@
 from ctypes.wintypes import RGB
 import pygame
-from settings import MANEUVERABILITY, UP, SPEED,MAX_SPEED
+from settings import MANEUVERABILITY, UP, SPEED, MAX_SPEED
 
 
 class Player:
@@ -16,8 +16,10 @@ class Player:
         self.images.append(pygame.image.load("Képek/player-4.png").convert_alpha())
         self.frame: float = 0
         self.changing: float = 0.2
-        self.fly:bool=True
-        self.standing_image:pygame.Surface=pygame.image.load("Képek/player_stand.png").convert_alpha()
+        self.fly: bool = True
+        self.standing_image: pygame.Surface = pygame.image.load(
+            "Képek/player_stand.png"
+        ).convert_alpha()
         self.image: pygame.Surface = self.images[self.frame]
 
     def rotate(self, clockwise: bool = True):
@@ -28,7 +30,9 @@ class Player:
     def draw(self, screen: pygame.Surface) -> None:
         angle = self.direction.angle_to(UP)
         rotated_image: pygame.Surface = pygame.transform.rotate(self.image, angle)
-        rotated_rect: pygame.Rect = rotated_image.get_rect(center=self.image.get_rect(center=self.position).center)
+        rotated_rect: pygame.Rect = rotated_image.get_rect(
+            center=self.image.get_rect(center=self.position).center
+        )
         screen.blit(rotated_image, rotated_rect)
         pygame.draw.rect(screen, RGB(0, 0, 255), rotated_rect, 3)
 
@@ -42,16 +46,17 @@ class Player:
             self.frame += self.changing
             if self.frame >= len(self.images):
                 self.frame = 0
-            self.image = pygame.transform.scale(self.images[int(self.frame)], (100, 100))
+            self.image = pygame.transform.scale(
+                self.images[int(self.frame)], (100, 100)
+            )
         else:
-            self.image=pygame.transform.scale(self.standing_image, (100,100))
-        self.fly=False
+            self.image = pygame.transform.scale(self.standing_image, (100, 100))
+        self.fly = False
 
     def move(self):
         self.position = self.position + self.velocity
 
     def speed_up(self):
         self.velocity += self.direction * SPEED
-        self.velocity=self.velocity.clamp_magnitude(MAX_SPEED)
-        self.fly=True
-
+        self.velocity = self.velocity.clamp_magnitude(MAX_SPEED)
+        self.fly = True

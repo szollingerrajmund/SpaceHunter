@@ -6,13 +6,16 @@ from ido import Ido
 from menuk import Menu
 from fomenu import Kezdo
 
+
 class Game(object):
     def __init__(self):
         pygame.init()
         self.screen_res: tuple[int, int] = (WIDTH, HEIGHT)
         self.screen: pygame.Surface = pygame.display.set_mode(self.screen_res)
         self.clock: pygame.time.Clock = pygame.time.Clock()
-        self.player: Player = Player(self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0))
+        self.player: Player = Player(
+            self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0)
+        )
         self.asteroid: Asteroid = Asteroid(800, 600, 10)
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
