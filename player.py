@@ -50,6 +50,8 @@ class Player:
         self.fly = False
 
     def move(self):
+        if self.out:
+            return
         self.position = self.position + self.velocity
 
 
@@ -59,5 +61,5 @@ class Player:
         self.fly = True
 
     def out_of_screen(self):
-        if (self.position.x + 45 > WIDTH or self.position.x - 45 < 0 or self.position.y + 45 > HEIGHT or self.position.y - 45 < 0):
+        if (self.position.x+50 > WIDTH or self.position.x-50 < 0 or self.position.y+50 > HEIGHT or self.position.y-50 < 0):
             self.out = True
