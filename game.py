@@ -3,6 +3,8 @@ from settings import HEIGHT, WIDTH, FPS
 from asteroid import Asteroid
 from player import Player
 from ido import Ido
+from menuk import Menu
+from fomenu import Kezdo
 
 class Game(object):
     def __init__(self):
