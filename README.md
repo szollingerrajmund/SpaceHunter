@@ -1,8 +1,6 @@
 # Pygame
 # Készítette:
-  ## Major Bálint István
-  ## Szollinger Rajmund
-  ## Baracskai Dóra
+  ## Major Bálint István, Szollinger Rajmund, Baracskai Dóra
 
 ## Játékünk rövid leírása:
-  ### Work In Progress
+  ### Játékunkban egy űrhajóval kell szétlőni az aszteroidákat amellyek kisebb darabokra esnek szét.
