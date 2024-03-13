@@ -89,24 +89,62 @@ class Menu(object):
         font2 = pygame.font.SysFont("Trebuchet", 46)
         font3 = pygame.font.SysFont("Trebuchet", 54)
         title = font.render("Segítség a játékhoz", True, (255, 255, 255))
-        # Átírni a szöveget a lentben!!!!
-        describe_game = font2.render(
-            "A különböző nyilakkal mozoghatsz", True, (255, 255, 255)
+        fel_nyil = font2.render("A fel nyillal mehetsz előre", True, (255, 255, 255))
+        oldal_nyil = font2.render(
+            "A ballra nyillal balra, a jobbra nyillal jobbra fordulhatsz",
+            True,
+            (255, 255, 255),
+        )
+        speed = font2.render("DE a sebesseéggel nagyon vigyázz!", True, (255, 255, 255))
+        describe = font2.render(
+            "Éld túl a legtovább az azsteroidák kikerülésével, és lődd szét a legtöbbet, hogy te legyél a galaxis megmentőja!",
+            True,
+            (255, 255, 255),
         )
         start_button = font3.render(
             "Nyomd meg az ENTER-t a játék elindításához", True, (255, 255, 255)
         )
+
         self.screen.blit(
             title,
-            (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height() * 5),
-        )
-        self.screen.blit(
-            describe_game,
             (
-                WIDTH / 2 - describe_game.get_width() / 2,
-                HEIGHT / 2 - describe_game.get_height() * 7,
+                WIDTH / 2 - title.get_width() / 2,
+                HEIGHT / 2 - title.get_height() * 5
             ),
         )
+        
+        self.screen.blit(
+            fel_nyil,
+            (
+                WIDTH / 2 - fel_nyil.get_width() / 2,
+                HEIGHT / 2 - fel_nyil.get_height() * 7,
+            ),
+        )
+        
+        self.screen.blit(
+            oldal_nyil,
+            (
+                WIDTH / 2 - oldal_nyil.get_width() / 2,
+                HEIGHT / 2 + oldal_nyil.get_height() * 8,
+            ),
+        )
+
+        self.screen.blit(
+            speed,
+            (
+                WIDTH / 2 - speed.get_width() / 2,
+                HEIGHT / 2 - speed.get_height() * 8,
+            ),
+        )
+
+        self.screen.blit(
+            describe,
+            (
+                WIDTH / 2 - describe.get_width() / 2,
+                HEIGHT / 2 + describe.get_height() * 9,
+            ),
+        )
+
         self.screen.blit(
             start_button,
             (
@@ -114,6 +152,7 @@ class Menu(object):
                 HEIGHT / 2 + start_button.get_height() * 9,
             ),
         )
+
         pygame.display.update()
 
     def game_over_menu(self):

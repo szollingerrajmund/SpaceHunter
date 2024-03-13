@@ -8,6 +8,7 @@ class Ido(object):
         pygame.init()
         self.screen_res: tuple[int, int] = (WIDTH, HEIGHT)
         self.screen: pygame.Surface = pygame.display.set_mode(self.screen_res)
+        self.time_start = time.time()
 
     def time(self):
         game_font = pygame.font.SysFont("Trebuchet", 52)
