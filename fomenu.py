@@ -32,7 +32,7 @@ class Kezdo:
         self.image = self.images[int(self.frame)]
 
     def move(self):
-        player_speed = 30  # 60
+        player_speed = 20 
         # Update player position to move from left to right
         self.position.x += player_speed
 
