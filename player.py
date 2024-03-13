@@ -1,6 +1,6 @@
 from ctypes.wintypes import RGB
 import pygame
-from settings import HEIGHT, MANEUVERABILITY, UP, SPEED, MAX_SPEED, WIDTH
+from settings import MANEUVERABILITY, UP, SPEED, MAX_SPEED
 
 
 class Player:
@@ -19,7 +19,6 @@ class Player:
         self.fly: bool = True
         self.standing_image: pygame.Surface = pygame.image.load("Képek/player_stand.png").convert_alpha()
         self.image: pygame.Surface = self.images[self.frame]
-        self.out = False
 
     def rotate(self, clockwise: bool = True):
         turn = 1 if clockwise else -1
@@ -35,9 +34,8 @@ class Player:
 
     def update(self, screen: pygame.Surface) -> None:
         self.animation()
-        self.move()
+        self.move(screen)
         self.draw(screen)
-        self.out_of_screen()
 
     def animation(self) -> None:
         if self.fly:
@@ -49,10 +47,8 @@ class Player:
             self.image = pygame.transform.scale(self.standing_image, (100, 100))
         self.fly = False
 
-    def move(self):
-        if self.out:
-            return
-        self.position = self.position + self.velocity
+    def move(self, screen:pygame.Surface):
+        self.position =self.wrap_position(self.position + self.velocity, screen)
 
 
     def speed_up(self):
@@ -60,6 +56,7 @@ class Player:
         self.velocity = self.velocity.clamp_magnitude(MAX_SPEED)
         self.fly = True
 
-    def out_of_screen(self):
-        if (self.position.x+50 > WIDTH or self.position.x-50 < 0 or self.position.y+50 > HEIGHT or self.position.y-50 < 0):
-            self.out = True
+    def wrap_position(self,position:pygame.Vector2,screen:pygame.Surface):
+        x,y=position
+        w,h= screen.get_size()
+        return pygame.Vector2(x % w, y % h)
