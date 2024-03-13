@@ -3,7 +3,7 @@ from settings import HEIGHT, WIDTH, FPS
 from asteroid import Asteroid
 from player import Player
 from ido import Ido
-from menu import Menu
+from menuk import Menu
 from fomenu import Kezdo
 
 
