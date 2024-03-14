@@ -18,6 +18,8 @@ class Game(object):
         self.menu: Menu = Menu()
         self.ido: Ido = Ido()
         self.kezdo: Kezdo = Kezdo(0, HEIGHT // 2)
+        self.asteroid_spawn: pygame.USEREVENT + 1
+        pygame.time.set_timer(self.asteroid_spawn, 1000)
         pygame.display.set_caption("Space Hunters")
         self.run()
 
