@@ -19,7 +19,6 @@ class Asteroid(object):
         self.images.append(pygame.image.load("Képek/Asteroid/10.png").convert_alpha())
         self.frame:float= 0
         self.hitbox: pygame.Rect = pygame.rect.Rect(0, 0, 200, 200)
-        self.changing: float = 0.25
         self.frame: float = 0
         self.changing: float = 0.35
 
