@@ -26,10 +26,19 @@ class Asteroid(object):
     def update(self, screen:pygame.Surface)-> None:
         self.animation()
         self.draw(screen)
+        self.moving(screen)
 
     def animation(self)->None:
         self.frame+=self.changing
         if self.frame>=len(self.images):
             self.frame=0
         self.image=self.images[int(self.frame)]
+
+    def moving(self, screen: pygame.Surface):
+        self.position = self.wrap_position(self.position + self.velocity, screen)    
+
+    def wrap_position(self, position: pygame.Vector2, screen: pygame.Surface):
+        x, y = position
+        w, h = screen.get_size()
+        return pygame.Vector2(x % w+20, y % h+20)
 

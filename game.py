@@ -18,8 +18,6 @@ class Game(object):
         self.menu: Menu = Menu()
         self.ido: Ido = Ido()
         self.kezdo: Kezdo = Kezdo(0, HEIGHT // 2)
-        self.asteroid_spawn: pygame.USEREVENT + 1
-        pygame.time.set_timer(self.asteroid_spawn, 1000)
         pygame.display.set_caption("Space Hunters")
         self.run()
 
@@ -60,6 +58,7 @@ class Game(object):
                 self.asteroid.update(self.screen)
                 self.ido.time()
                 self.ido.points()
+                
 
             elif self.game_state == "game_over":
                 self.menu.game_over_menu()
@@ -89,5 +88,3 @@ class Game(object):
         Háttérkép = pygame.image.load("Képek/background.png")
         Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
         self.screen.blit(Háttér, (0, 0))
-
-    def _asteroid_spawn(self):
