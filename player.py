@@ -34,7 +34,7 @@ class Player:
 
     def update(self, screen: pygame.Surface) -> None:
         self.animation()
-        self.move(screen)
+        self.move()
         self.draw(screen)
 
     def animation(self) -> None:
@@ -47,8 +47,8 @@ class Player:
             self.image = pygame.transform.scale(self.standing_image, (100, 100))
         self.fly = False
 
-    def move(self, screen:pygame.Surface):
-        self.position =self.wrap_position(self.position + self.velocity, screen)
+    def move(self):
+        self.position =self.wrap_position(self.position + self.velocity)
 
 
     def speed_up(self):
@@ -56,7 +56,7 @@ class Player:
         self.velocity = self.velocity.clamp_magnitude(MAX_SPEED)
         self.fly = True
 
-    def wrap_position(self,position:pygame.Vector2,screen:pygame.Surface):
+    def wrap_position(self,position:pygame.Vector2):
         x,y=position
-        w,h= screen.get_size()
+        w,h = (1650,910)
         return pygame.Vector2(x % w, y % h)
