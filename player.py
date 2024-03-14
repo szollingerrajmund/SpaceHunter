@@ -1,4 +1,3 @@
-from ctypes.wintypes import RGB
 import pygame
 from settings import MANEUVERABILITY, UP, SPEED, MAX_SPEED,MIN_SPEED
 
