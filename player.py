@@ -17,9 +17,7 @@ class Player:
         self.frame: float = 0
         self.changing: float = 0.2
         self.fly: bool = True
-        self.standing_image: pygame.Surface = pygame.image.load(
-            "Képek/player_stand.png"
-        ).convert_alpha()
+        self.standing_image: pygame.Surface = pygame.image.load("Képek/player_stand.png").convert_alpha()
         self.image: pygame.Surface = self.images[self.frame]
 
     def rotate(self, clockwise: bool = True):

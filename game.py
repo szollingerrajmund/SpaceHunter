@@ -26,7 +26,7 @@ class Game(object):
 
     def run(self):
         animation_started = False
-        self.menu_started = False  # Flag to track if menu has been drawn
+        self.menu_started = False
 
         while True:
             self._input_kezelés()
@@ -44,7 +44,7 @@ class Game(object):
             if self.game_state == "start_menu":
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_RETURN]:
-                    self.game_state = "game_over"
+                    self.game_state = "game"
                 elif keys[pygame.K_h]:
                     self.game_state = "help"
 
@@ -61,6 +61,7 @@ class Game(object):
                 self.asteroid.update(self.screen)
                 self.ido.time()
                 self.ido.points()
+                
 
             elif self.game_state == "game_over":
                 self.menu.game_over_menu()
@@ -78,11 +79,12 @@ class Game(object):
         for event in pygame.event.get():
             if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
                 quit()
+            
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.player.rotate(clockwise=True)
         elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.player.rotate(clockwise=False)
-        elif keys[pygame.K_UP] or keys[pygame.K_w]:
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.player.speed_up()
 
     def _draw(self):
