@@ -54,9 +54,14 @@ class Player:
         self.fly = False
 
     def move(self):
-        self.position = self.position + self.velocity
+        self.position = self.wrap_position(self.position + self.velocity)
 
     def speed_up(self):
         self.velocity += self.direction * SPEED
         self.velocity = self.velocity.clamp_magnitude(MAX_SPEED)
         self.fly = True
+
+    def wrap_position(self, position: pygame.Vector2):
+        x, y = position
+        w, h = (1650, 910)
+        return pygame.Vector2(x % w, y % h)
