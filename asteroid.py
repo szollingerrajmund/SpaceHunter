@@ -1,3 +1,4 @@
+from ctypes.wintypes import RGB
 import pygame
 class Asteroid(object):
     def __init__(self,x: int, y: int, velocity: float) -> None:
@@ -18,10 +19,14 @@ class Asteroid(object):
         self.changing: float = 0.35
         self.image: pygame.Surface = self.images[self.frame]
 
-
+        
     def draw(self, screen: pygame.Surface)-> None:
-        blit_position = self.image.get_rect(center = self.position)
+        
+        blit_position: pygame.Rect = self.image.get_rect(center = self.position)
         screen.blit(self.image, blit_position)
+        pygame.draw.rect(screen, RGB(0, 255, 255),blit_position, 3)
+        
+        
     
     def update(self, screen:pygame.Surface)-> None:
         self.animation()
@@ -32,7 +37,8 @@ class Asteroid(object):
         self.frame+=self.changing
         if self.frame>=len(self.images):
             self.frame=0
-        self.image=self.images[int(self.frame)]
+        self.image = pygame.transform.scale(self.images[int(self.frame)], (300, 300))
+
 
     def moving(self, screen: pygame.Surface):
         self.position = self.wrap_position(self.position + self.velocity, screen)    
@@ -40,5 +46,5 @@ class Asteroid(object):
     def wrap_position(self, position: pygame.Vector2, screen: pygame.Surface):
         x, y = position
         w, h = screen.get_size()
-        return pygame.Vector2(x % w+20, y % h+20)
+        return pygame.Vector2(x % w + 0.5, y % h + 0.5)
 
