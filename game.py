@@ -61,6 +61,7 @@ class Game(object):
                 self.asteroid.update(self.screen)
                 self.ido.time()
                 self.ido.points()
+                
 
             elif self.game_state == "game_over":
                 self.menu.game_over_menu()
@@ -78,6 +79,7 @@ class Game(object):
         for event in pygame.event.get():
             if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
                 quit()
+            
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.player.rotate(clockwise=True)
         elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
