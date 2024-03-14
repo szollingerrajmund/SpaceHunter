@@ -95,9 +95,14 @@ class Menu(object):
             True,
             (255, 255, 255),
         )
-        speed = font2.render("DE a sebesseéggel nagyon vigyázz!", True, (255, 255, 255))
+        speed = font2.render("DE a sebességgel nagyon vigyázz!", True, (255, 255, 255))
         describe = font2.render(
-            "Éld túl a legtovább az azsteroidák kikerülésével, és lődd szét a legtöbbet, hogy te legyél a galaxis megmentőja!",
+            "Éld túl a legtovább az aszteroidák kikerülésével",
+            True,
+            (255, 255, 255),
+        )
+        describe2 = font2.render(
+            "és lődd szét a legtöbbet, hogy te legyél a galaxis megmentője!",
             True,
             (255, 255, 255),
         )
@@ -107,25 +112,22 @@ class Menu(object):
 
         self.screen.blit(
             title,
-            (
-                WIDTH / 2 - title.get_width() / 2,
-                HEIGHT / 2 - title.get_height() * 5
-            ),
+            (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height() * 5),
         )
-        
+
         self.screen.blit(
             fel_nyil,
             (
                 WIDTH / 2 - fel_nyil.get_width() / 2,
-                HEIGHT / 2 - fel_nyil.get_height() * 7,
+                HEIGHT / 2 - fel_nyil.get_height() * 8,
             ),
         )
-        
+
         self.screen.blit(
             oldal_nyil,
             (
                 WIDTH / 2 - oldal_nyil.get_width() / 2,
-                HEIGHT / 2 + oldal_nyil.get_height() * 8,
+                HEIGHT / 2 - oldal_nyil.get_height() * 6.5,
             ),
         )
 
@@ -133,7 +135,7 @@ class Menu(object):
             speed,
             (
                 WIDTH / 2 - speed.get_width() / 2,
-                HEIGHT / 2 - speed.get_height() * 8,
+                HEIGHT / 2 - speed.get_height() * 5,
             ),
         )
 
@@ -141,7 +143,15 @@ class Menu(object):
             describe,
             (
                 WIDTH / 2 - describe.get_width() / 2,
-                HEIGHT / 2 + describe.get_height() * 9,
+                HEIGHT / 2 + describe.get_height() * 6,
+            ),
+        )
+
+        self.screen.blit(
+            describe2,
+            (
+                WIDTH / 2 - describe2.get_width() / 2,
+                HEIGHT / 2 + describe2.get_height() * 8.5,
             ),
         )
 
