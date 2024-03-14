@@ -6,6 +6,15 @@ class Asteroid(object):
         self.velocity: pygame.Vector2 = pygame.Vector2(velocity)
         self.images: list[pygame.Surface] = []
         self.images.append(pygame.image.load("Képek/Asteroid/1.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/2.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/3.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/4.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/5.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/6.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/7.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/8.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/9.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Asteroid/10.png").convert_alpha())
         self.frame:float= 0
         self.changing: float = 0.35
         self.image: pygame.Surface = self.images[self.frame]
