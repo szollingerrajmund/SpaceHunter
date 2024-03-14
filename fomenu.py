@@ -9,10 +9,18 @@ class Kezdo:
         self.screen_res: tuple[int, int] = (WIDTH, HEIGHT)
         self.screen: pygame.Surface = pygame.display.set_mode(self.screen_res)
         self.images: list[pygame.Surface] = []
-        self.images.append(pygame.image.load("Képek/Kezdo/Kezdo2.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/Kezdo/Kezdo3.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/Kezdo/Kezdo4.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/Kezdo/Kezdo6.png").convert_alpha())
+        self.images.append(
+            pygame.image.load("Képek/Oldalra/oldalra_1.png").convert_alpha()
+        )
+        self.images.append(
+            pygame.image.load("Képek/Oldalra/oldalra_2.png").convert_alpha()
+        )
+        self.images.append(
+            pygame.image.load("Képek/Oldalra/oldalra_3.png").convert_alpha()
+        )
+        self.images.append(
+            pygame.image.load("Képek/Oldalra/oldalra_4.png").convert_alpha()
+        )
         self.frame: float = 0
         self.changing: float = 0.35
         self.image: pygame.Surface = self.images[int(self.frame)]
@@ -32,7 +40,7 @@ class Kezdo:
         self.image = self.images[int(self.frame)]
 
     def move(self):
-        player_speed = 30  # 60
+        player_speed = 16
         # Update player position to move from left to right
         self.position.x += player_speed
 
