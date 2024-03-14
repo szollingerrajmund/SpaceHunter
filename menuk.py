@@ -1,6 +1,7 @@
 import pygame
 from settings import HEIGHT, WIDTH
 
+
 class Menu(object):
     def __init__(self):
         pygame.init()
@@ -24,10 +25,10 @@ class Menu(object):
         help_button = font2.render("H - Segítség", True, (255, 255, 255))
 
         # Gradually increase the visibility of texts
-        for alpha in range(0, 256, 2):
+        for alpha in range(0, 256):
             # Display the background
             self.screen.blit(background_with_alpha, (0, 0))
-            
+
             # Blit texts with varying alpha values
             title_with_alpha = title.copy()
             title_with_alpha.set_alpha(alpha)
@@ -38,7 +39,8 @@ class Menu(object):
 
             # Blit texts to the screen
             self.screen.blit(
-                title_with_alpha, (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height())
+                title_with_alpha,
+                (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height()),
             )
             self.screen.blit(
                 start_button_with_alpha,
@@ -87,24 +89,72 @@ class Menu(object):
         font2 = pygame.font.SysFont("Trebuchet", 46)
         font3 = pygame.font.SysFont("Trebuchet", 54)
         title = font.render("Segítség a játékhoz", True, (255, 255, 255))
-        # Átírni a szöveget a lentben!!!!
-        describe_game = font2.render(
-            "A különböző nyilakkal mozoghatsz", True, (255, 255, 255)
+        fel_nyil = font2.render("A fel nyillal mehetsz előre", True, (255, 255, 255))
+        oldal_nyil = font2.render(
+            "A ballra nyillal balra, a jobbra nyillal jobbra fordulhatsz",
+            True,
+            (255, 255, 255),
+        )
+        speed = font2.render("DE a sebességgel nagyon vigyázz!", True, (255, 255, 255))
+        describe = font2.render(
+            "Éld túl a legtovább az aszteroidák kikerülésével",
+            True,
+            (255, 255, 255),
+        )
+        describe2 = font2.render(
+            "és lődd szét a legtöbbet, hogy te legyél a galaxis megmentője!",
+            True,
+            (255, 255, 255),
         )
         start_button = font3.render(
             "Nyomd meg az ENTER-t a játék elindításához", True, (255, 255, 255)
         )
+
         self.screen.blit(
             title,
             (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height() * 5),
         )
+
         self.screen.blit(
-            describe_game,
+            fel_nyil,
             (
-                WIDTH / 2 - describe_game.get_width() / 2,
-                HEIGHT / 2 - describe_game.get_height() * 7,
+                WIDTH / 2 - fel_nyil.get_width() / 2,
+                HEIGHT / 2 - fel_nyil.get_height() * 8,
             ),
         )
+
+        self.screen.blit(
+            oldal_nyil,
+            (
+                WIDTH / 2 - oldal_nyil.get_width() / 2,
+                HEIGHT / 2 - oldal_nyil.get_height() * 6.5,
+            ),
+        )
+
+        self.screen.blit(
+            speed,
+            (
+                WIDTH / 2 - speed.get_width() / 2,
+                HEIGHT / 2 - speed.get_height() * 5,
+            ),
+        )
+
+        self.screen.blit(
+            describe,
+            (
+                WIDTH / 2 - describe.get_width() / 2,
+                HEIGHT / 2 + describe.get_height() * 6,
+            ),
+        )
+
+        self.screen.blit(
+            describe2,
+            (
+                WIDTH / 2 - describe2.get_width() / 2,
+                HEIGHT / 2 + describe2.get_height() * 8.5,
+            ),
+        )
+
         self.screen.blit(
             start_button,
             (
@@ -112,6 +162,7 @@ class Menu(object):
                 HEIGHT / 2 + start_button.get_height() * 9,
             ),
         )
+
         pygame.display.update()
 
     def game_over_menu(self):

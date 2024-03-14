@@ -1,7 +1,9 @@
 from ctypes.wintypes import RGB
 import pygame
+
+
 class Asteroid(object):
-    def __init__(self,x: int, y: int, velocity: float) -> None:
+    def __init__(self, x: int, y: int, velocity: float) -> None:
         self.position: pygame.Vector2 = pygame.Vector2(x, y)
         self.velocity: pygame.Vector2 = pygame.Vector2(velocity)
         self.images: list[pygame.Surface] = []
@@ -18,7 +20,11 @@ class Asteroid(object):
         self.frame:float= 0
         self.hitbox: pygame.Rect = pygame.rect.Rect(0, 0, 200, 200)
         self.changing: float = 0.25
+        self.frame: float = 0
+        self.changing: float = 0.35
+
         self.image: pygame.Surface = self.images[self.frame]
+
 
         
     def draw(self, screen: pygame.Surface)-> None:
