@@ -2,18 +2,20 @@ import time
 import pygame
 from settings import HEIGHT, WIDTH
 
+
 class Ido(object):
     def __init__(self):
         pygame.init()
         self.screen_res: tuple[int, int] = (WIDTH, HEIGHT)
         self.screen: pygame.Surface = pygame.display.set_mode(self.screen_res)
+        self.time_start = time.time()
 
     def time(self):
         game_font = pygame.font.Font("Romulus.ttf", 52)
         if not hasattr(self, "time_start"):
             self.time_start = time.time()
         game_time = str(int(time.time() - self.time_start))
-        time_surf = game_font.render("Idő: " + game_time, True, (255, 255, 255))
+        time_surf = game_font.render("Idő: " + game_time + "mp", True, (255, 255, 255))
         time_rect = time_surf.get_rect(topleft=(10, 10))
         self.screen.blit(time_surf, time_rect)
 

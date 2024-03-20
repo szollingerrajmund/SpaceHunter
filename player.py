@@ -27,7 +27,9 @@ class Player:
     def draw(self, screen: pygame.Surface) -> None:
         angle = self.direction.angle_to(UP)
         rotated_image: pygame.Surface = pygame.transform.rotate(self.image, angle)
-        rotated_rect: pygame.Rect = rotated_image.get_rect(center=self.image.get_rect(center=self.position).center)
+        rotated_rect: pygame.Rect = rotated_image.get_rect(
+            center=self.image.get_rect(center=self.position).center
+        )
         screen.blit(rotated_image, rotated_rect)
 
     def update(self, screen: pygame.Surface) -> None:
@@ -40,21 +42,21 @@ class Player:
             self.frame += self.changing
             if self.frame >= len(self.images):
                 self.frame = 0
+
             self.image:pygame.Surface = self.images[int(self.frame)]
         else:
             self.image:pygame.Surface = self.standing_image
         self.fly = False
 
     def move(self):
-        self.position =self.wrap_position(self.position + self.velocity)
-
+        self.position = self.wrap_position(self.position + self.velocity)
 
     def speed_up(self):
         self.velocity += self.direction * SPEED
         self.velocity = self.velocity.clamp_magnitude(MIN_SPEED,MAX_SPEED)
         self.fly = True
 
-    def wrap_position(self,position:pygame.Vector2):
-        x,y=position
-        w,h = (1650,910)
+    def wrap_position(self, position: pygame.Vector2):
+        x, y = position
+        w, h = (1650, 910)
         return pygame.Vector2(x % w, y % h)
