@@ -8,6 +8,7 @@ class Player:
         self.position: pygame.Vector2 = pygame.Vector2(x, y)
         self.velocity: pygame.Vector2 = pygame.Vector2(velocity)
         self.direction: pygame.Vector2 = pygame.Vector2(UP)
+        #self.create_bullet_callback=create_bullet_callback
         self.images: list[pygame.Surface] = []
         self.images.append(pygame.image.load("Képek/player-0.png").convert_alpha())
         self.images.append(pygame.image.load("Képek/player-1.png").convert_alpha())
@@ -28,9 +29,7 @@ class Player:
     def draw(self, screen: pygame.Surface) -> None:
         angle = self.direction.angle_to(UP)
         rotated_image: pygame.Surface = pygame.transform.rotate(self.image, angle)
-        rotated_rect: pygame.Rect = rotated_image.get_rect(
-            center=self.image.get_rect(center=self.position).center
-        )
+        rotated_rect: pygame.Rect = rotated_image.get_rect(center=self.image.get_rect(center=self.position).center)
         screen.blit(rotated_image, rotated_rect)
         pygame.draw.rect(screen, RGB(0, 0, 255), rotated_rect, 3)
 
@@ -44,9 +43,7 @@ class Player:
             self.frame += self.changing
             if self.frame >= len(self.images):
                 self.frame = 0
-            self.image = pygame.transform.scale(
-                self.images[int(self.frame)], (100, 100)
-            )
+            self.image = pygame.transform.scale(self.images[int(self.frame)], (100, 100))
         else:
             self.image = pygame.transform.scale(self.standing_image, (100, 100))
         self.fly = False
@@ -63,3 +60,8 @@ class Player:
         x, y = position
         w, h = (1650, 910)
         return pygame.Vector2(x % w, y % h)
+    
+    # def shoot(self):
+    #     bullet_velocity = self.direction * BULLET_SPEED + self.velocity
+    #     bullet = Bullets(self.position, bullet_velocity)
+    #     self.create_bullet_callback(bullet)
