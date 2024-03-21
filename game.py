@@ -16,8 +16,9 @@ class Game(object):
         self.player: Player = Player(
             self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0)   
         )
-        
         self.asteroid: Asteroid = Asteroid(800, 600, 10)
+        self.asteroid_spawn = pygame.USEREVENT + 1
+        pygame.time.set_timer(self.asteroid_spawn, 1000)
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
         self.ido: Ido = Ido()
@@ -71,6 +72,9 @@ class Game(object):
                     self.game_state = "start_menu"
                 if keys[pygame.K_k]:
                     quit()
+            
+            for i in self.
+                self.asteroid == self.asteroid_spawn
 
             pygame.display.update()
             self.clock.tick(FPS)
