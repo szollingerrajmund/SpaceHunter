@@ -84,7 +84,9 @@ class Game(object):
             self.player.rotate(clockwise=False)
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.player.speed_up()  
-                
+        if keys[pygame.K_SPACE]:
+            pass
+
     def _draw(self):
         Háttérkép = pygame.image.load("Képek/background.png")
         Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
