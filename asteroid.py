@@ -52,7 +52,7 @@ class Asteroid(object):
 
     def wrap_position(self, position: pygame.Vector2, screen: pygame.Surface):
         x, y = position
-        w, h = screen.get_size()
+        w, h = (1700, 950)
         return pygame.Vector2(x % w + 0.5, y % h + 0.5)
 
 
