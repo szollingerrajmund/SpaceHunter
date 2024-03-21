@@ -16,8 +16,8 @@ class Menu(object):
         background_with_alpha = Háttér.convert_alpha()
 
         # Text rendering
-        font = pygame.font.SysFont("Trebuchet", 186)
-        font2 = pygame.font.SysFont("Trebuchet", 50)
+        font = pygame.font.Font("Romulus.ttf", 156)
+        font2 = pygame.font.Font("Romulus.ttf", 50)
         title = font.render("Space Hunter", True, (255, 255, 255))
         start_button = font2.render(
             "Nyomd meg az ENTER-t a játék elindításához", True, (255, 255, 255)
@@ -85,9 +85,9 @@ class Menu(object):
         Háttérkép = pygame.image.load("Képek/background.png")
         Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
         self.screen.blit(Háttér, (0, 0))
-        font = pygame.font.SysFont("Trebuchet", 110)
-        font2 = pygame.font.SysFont("Trebuchet", 46)
-        font3 = pygame.font.SysFont("Trebuchet", 54)
+        font = pygame.font.Font("Romulus.ttf", 80)
+        font2 = pygame.font.Font("Romulus.ttf", 66)
+        font3 = pygame.font.Font("Romulus.ttf", 46)
         title = font.render("Segítség a játékhoz", True, (255, 255, 255))
         fel_nyil = font2.render("A fel nyillal mehetsz előre", True, (255, 255, 255))
         oldal_nyil = font2.render(
@@ -169,9 +169,9 @@ class Menu(object):
         Háttérkép = pygame.image.load("Képek/background.png")
         Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
         self.screen.blit(Háttér, (0, 0))
-        font = pygame.font.SysFont("Trebuchet", 140)
-        font2 = pygame.font.SysFont("Trebuchet", 80)
-        font3 = pygame.font.SysFont("Trebuchet", 60)
+        font =pygame.font.Font("Romulus.ttf", 80)
+        font2 = pygame.font.Font("Romulus.ttf", 50)
+        font3 = pygame.font.Font("Romulus.ttf", 50)
         title = font.render("Játék Vége", True, (255, 255, 255))
         restart_button = font2.render("R - Újra", True, (255, 255, 255))
         quit_button = font2.render("K - Kilépés", True, (255, 255, 255))
