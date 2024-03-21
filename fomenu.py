@@ -41,14 +41,11 @@ class Kezdo:
 
     def move(self):
         player_speed = 16
-        # Update player position to move from left to right
         self.position.x += player_speed
 
-        # Check if the player is out of the window
         if self.position.x - 180 > WIDTH:
-            # If out of the window, stop the animation and trigger another action
-            return False  # Animation stopped
-        return True  # Animation continues
+            return False
+        return True
 
     def draw_background(self):
         background = pygame.image.load("Képek/background.png")
@@ -56,27 +53,19 @@ class Kezdo:
         self.screen.blit(background, (0, 0))
 
     def mozog(self):
-        # Flag to check if the animation is still running
         animation_running = True
 
-        # Main game loop
         while animation_running:
-            # Handle events
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
 
-            # Clear the screen
             self.screen.fill((255, 255, 255))
 
-            # Draw the background
             self.draw_background()
 
-            # Update and move the player
             animation_running = self.move()
 
-            # Update the display
             self.update()
 
-            # Update the display
             pygame.display.flip()

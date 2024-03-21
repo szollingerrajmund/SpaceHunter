@@ -1,5 +1,5 @@
 import pygame
-from settings import MANEUVERABILITY, UP, SPEED, MAX_SPEED,MIN_SPEED
+from settings import MANEUVERABILITY, UP, SPEED, MAX_SPEED, MIN_SPEED
 
 
 class Player:
@@ -16,7 +16,9 @@ class Player:
         self.frame: float = 0
         self.changing: float = 0.2
         self.fly: bool = True
-        self.standing_image: pygame.Surface = pygame.image.load("Képek/player_stand.png").convert_alpha()
+        self.standing_image: pygame.Surface = pygame.image.load(
+            "Képek/player_stand.png"
+        ).convert_alpha()
         self.image: pygame.Surface = self.images[self.frame]
 
     def rotate(self, clockwise: bool = True):
@@ -43,9 +45,9 @@ class Player:
             if self.frame >= len(self.images):
                 self.frame = 0
 
-            self.image:pygame.Surface = self.images[int(self.frame)]
+            self.image: pygame.Surface = self.images[int(self.frame)]
         else:
-            self.image:pygame.Surface = self.standing_image
+            self.image: pygame.Surface = self.standing_image
         self.fly = False
 
     def move(self):
@@ -53,7 +55,7 @@ class Player:
 
     def speed_up(self):
         self.velocity += self.direction * SPEED
-        self.velocity = self.velocity.clamp_magnitude(MIN_SPEED,MAX_SPEED)
+        self.velocity = self.velocity.clamp_magnitude(MIN_SPEED, MAX_SPEED)
         self.fly = True
 
     def wrap_position(self, position: pygame.Vector2):
