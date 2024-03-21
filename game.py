@@ -13,7 +13,6 @@ class Game(object):
         self.screen_res: tuple[int, int] = (WIDTH, HEIGHT)
         self.screen: pygame.Surface = pygame.display.set_mode(self.screen_res)
         self.clock: pygame.time.Clock = pygame.time.Clock()
-        #self.bullets:pygame.Surface=[]
         self.player: Player = Player(self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0))
         self.asteroid: Asteroid = Asteroid(800, 600, 10)
         self.game_state = "start_menu"
@@ -84,10 +83,8 @@ class Game(object):
         elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.player.rotate(clockwise=False)
         if keys[pygame.K_UP] or keys[pygame.K_w]:
-            self.player.speed_up()
-        # if keys[pygame.K_SPACE]:
-            # self.player.shoot()
-        
+            self.player.speed_up()  
+                
     def _draw(self):
         Háttérkép = pygame.image.load("Képek/background.png")
         Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))

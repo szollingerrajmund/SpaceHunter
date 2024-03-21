@@ -8,7 +8,6 @@ class Player:
         self.position: pygame.Vector2 = pygame.Vector2(x, y)
         self.velocity: pygame.Vector2 = pygame.Vector2(velocity)
         self.direction: pygame.Vector2 = pygame.Vector2(UP)
-        #self.create_bullet_callback=create_bullet_callback
         self.images: list[pygame.Surface] = []
         self.images.append(pygame.image.load("Képek/player-0.png").convert_alpha())
         self.images.append(pygame.image.load("Képek/player-1.png").convert_alpha())
@@ -61,7 +60,5 @@ class Player:
         w, h = (1650, 910)
         return pygame.Vector2(x % w, y % h)
     
-    # def shoot(self):
-    #     bullet_velocity = self.direction * BULLET_SPEED + self.velocity
-    #     bullet = Bullets(self.position, bullet_velocity)
-    #     self.create_bullet_callback(bullet)
+    def shoot(self):
+        pass
