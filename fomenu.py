@@ -40,7 +40,7 @@ class Kezdo:
         self.image = self.images[int(self.frame)]
 
     def move(self):
-        player_speed = 16
+        player_speed = 15
         self.position.x += player_speed
 
         if self.position.x - 180 > WIDTH:

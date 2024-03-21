@@ -14,8 +14,8 @@ class Menu(object):
 
         background_with_alpha = Háttér.convert_alpha()
 
-        font = pygame.font.Font("Romulus.ttf", 156)
-        font2 = pygame.font.Font("Romulus.ttf", 50)
+        font = pygame.font.Font("Romulus.ttf", 200)
+        font2 = pygame.font.Font("Romulus.ttf", 60)
         title = font.render("Space Hunter", True, (255, 255, 255))
         start_button = font2.render(
             "Nyomd meg az ENTER-t a játék elindításához", True, (255, 255, 255)
@@ -76,13 +76,18 @@ class Menu(object):
         Háttérkép = pygame.image.load("Képek/background.png")
         Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
         self.screen.blit(Háttér, (0, 0))
-        font = pygame.font.Font("Romulus.ttf", 80)
-        font2 = pygame.font.Font("Romulus.ttf", 66)
-        font3 = pygame.font.Font("Romulus.ttf", 46)
+        font = pygame.font.Font("Romulus.ttf", 110)
+        font2 = pygame.font.Font("Romulus.ttf", 60)
+        font3 = pygame.font.Font("Romulus.ttf", 65)
         title = font.render("Segítség a játékhoz", True, (255, 255, 255))
         fel_nyil = font2.render("A fel nyillal mehetsz előre", True, (255, 255, 255))
-        oldal_nyil = font2.render(
-            "A ballra nyillal balra, a jobbra nyillal jobbra fordulhatsz",
+        oldal_nyil1 = font2.render(
+            "A ballra nyillal balra,",
+            True,
+            (255, 255, 255),
+        )
+        oldal_nyil2 = font2.render(
+            "a jobbra nyillal jobbra fordulhatsz",
             True,
             (255, 255, 255),
         )
@@ -103,22 +108,30 @@ class Menu(object):
 
         self.screen.blit(
             title,
-            (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height() * 5),
+            (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height() * 4),
         )
 
         self.screen.blit(
             fel_nyil,
             (
                 WIDTH / 2 - fel_nyil.get_width() / 2,
-                HEIGHT / 2 - fel_nyil.get_height() * 8,
+                HEIGHT / 2 - fel_nyil.get_height() * 4.5,
             ),
         )
 
         self.screen.blit(
-            oldal_nyil,
+            oldal_nyil1,
             (
-                WIDTH / 2 - oldal_nyil.get_width() / 2,
-                HEIGHT / 2 - oldal_nyil.get_height() * 6.5,
+                WIDTH / 2 - oldal_nyil1.get_width() / 2,
+                HEIGHT / 2 - oldal_nyil1.get_height() * 3.5,
+            ),
+        )
+
+        self.screen.blit(
+            oldal_nyil2,
+            (
+                WIDTH / 2 - oldal_nyil2.get_width() / 2,
+                HEIGHT / 2 - oldal_nyil2.get_height() * 2.5,
             ),
         )
 
@@ -126,7 +139,7 @@ class Menu(object):
             speed,
             (
                 WIDTH / 2 - speed.get_width() / 2,
-                HEIGHT / 2 - speed.get_height() * 5,
+                HEIGHT / 2 - speed.get_height() * 1.5,
             ),
         )
 
@@ -134,7 +147,7 @@ class Menu(object):
             describe,
             (
                 WIDTH / 2 - describe.get_width() / 2,
-                HEIGHT / 2 + describe.get_height() * 6,
+                HEIGHT / 2 + describe.get_height() * 3,
             ),
         )
 
@@ -142,7 +155,7 @@ class Menu(object):
             describe2,
             (
                 WIDTH / 2 - describe2.get_width() / 2,
-                HEIGHT / 2 + describe2.get_height() * 8.5,
+                HEIGHT / 2 + describe2.get_height() * 4,
             ),
         )
 
@@ -150,7 +163,7 @@ class Menu(object):
             start_button,
             (
                 WIDTH / 2 - start_button.get_width() / 2,
-                HEIGHT / 2 + start_button.get_height() * 9,
+                HEIGHT / 2 + start_button.get_height() * 6,
             ),
         )
 
@@ -160,60 +173,61 @@ class Menu(object):
         Háttérkép = pygame.image.load("Képek/background.png")
         Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
         self.screen.blit(Háttér, (0, 0))
-        font = pygame.font.Font("Romulus.ttf", 80)
-        font2 = pygame.font.Font("Romulus.ttf", 50)
-        font3 = pygame.font.Font("Romulus.ttf", 50)
+        font = pygame.font.Font("Romulus.ttf", 135)
+        font2 = pygame.font.Font("Romulus.ttf", 80)
+        font3 = pygame.font.Font("Romulus.ttf", 60)
+        font4 = pygame.font.Font("Romulus.ttf", 90)
         title = font.render("Játék Vége", True, (255, 255, 255))
         restart_button = font2.render("R - Újra", True, (255, 255, 255))
         quit_button = font2.render("K - Kilépés", True, (255, 255, 255))
-        makers = font2.render("Készítők:", True, (255, 255, 255))
+        makers = font4.render("Készítők:", True, (255, 255, 255))
         maker1 = font3.render("Major Bálint István", True, (255, 255, 255))
         maker2 = font3.render("Szollinger Rajmund", True, (255, 255, 255))
         maker3 = font3.render("Baracskai Dóra", True, (255, 255, 255))
         self.screen.blit(
             title,
-            (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height() * 3.8),
+            (WIDTH / 2 - title.get_width() / 2, HEIGHT / 2 - title.get_height() * 3.5),
         )
         self.screen.blit(
             restart_button,
             (
                 WIDTH / 2 - restart_button.get_width() / 2,
-                HEIGHT / 2 - restart_button.get_height() * 3,
+                HEIGHT / 2 - restart_button.get_height() * 3.8,
             ),
         )
         self.screen.blit(
             quit_button,
             (
                 WIDTH / 2 - quit_button.get_width() / 2,
-                HEIGHT / 2 - quit_button.get_height() * 2,
+                HEIGHT / 2 - quit_button.get_height() * 2.8,
             ),
         )
         self.screen.blit(
             makers,
             (
                 WIDTH / 2 - makers.get_width() / 2,
-                HEIGHT / 2 + makers.get_height() * 2,
+                HEIGHT / 2 + makers.get_height() * 1.35,
             ),
         )
         self.screen.blit(
             maker1,
             (
                 WIDTH / 2 - maker1.get_width() / 2,
-                HEIGHT / 2 + maker1.get_height() * 4.5,
+                HEIGHT / 2 + maker1.get_height() * 4,
             ),
         )
         self.screen.blit(
             maker2,
             (
                 WIDTH / 2 - maker2.get_width() / 2,
-                HEIGHT / 2 + maker2.get_height() * 6,
+                HEIGHT / 2 + maker2.get_height() * 5.2,
             ),
         )
         self.screen.blit(
             maker3,
             (
                 WIDTH / 2 - maker3.get_width() / 2,
-                HEIGHT / 2 + maker3.get_height() * 8,
+                HEIGHT / 2 + maker3.get_height() * 6.5,
             ),
         )
         pygame.display.update()

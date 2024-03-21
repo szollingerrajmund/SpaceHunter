@@ -62,6 +62,10 @@ class Game(object):
                 self.ido.time()
                 self.ido.points()
 
+                # collisions = pygame.sprite.spritecollide(self.player, self.asteroid, False)
+                # if collisions:
+                #     self.game_state = "game_over"
+
             elif self.game_state == "game_over":
                 self.menu.game_over_menu()
                 keys = pygame.key.get_pressed()
