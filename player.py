@@ -61,5 +61,5 @@ class Player:
 
     def wrap_position(self, position: pygame.Vector2):
         x, y = position
-        w, h = (1650, 910)
+        w, h = (1700, 950)
         return pygame.Vector2(x % w, y % h)
