@@ -16,10 +16,9 @@ class Game(object):
         self.player: Player = Player(
             self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0)   
         )
-        self.asteroid: Asteroid = Asteroid(800, 600, 10)
         self.asteroid_spawn = pygame.USEREVENT + 1
-        pygame.time.set_timer(self.asteroid_spawn, 1000)
-        self.asteroid_list = []
+        pygame.time.set_timer(self.asteroid_spawn, 10)
+        self.asteroid_list: list[Asteroid] = [Asteroid(800, 600, 1000)]
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
         self.ido: Ido = Ido()
@@ -61,7 +60,8 @@ class Game(object):
                 self.game_over = False
                 self._draw()
                 self.player.update(self.screen)
-                self.asteroid.update(self.screen)
+                for asteroid in self.asteroid_list:
+                    asteroid.update(self.screen)
                 self.ido.time()
                 self.ido.points()
                 
@@ -84,7 +84,7 @@ class Game(object):
             if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
                 quit()
             if event.type == self.asteroid_spawn:
-                self.asteroid_list = Asteroid
+                self.asteroid_list.append(Asteroid(0, 0, 1))
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.player.rotate(clockwise=True)
         elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
