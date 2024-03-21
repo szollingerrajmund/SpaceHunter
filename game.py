@@ -16,10 +16,7 @@ class Game(object):
         self.player: Player = Player(
             self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0)   
         )
-        timer = pygame.time
-            for i in timer:
-                if timer == 0:
-            pygame.quit
+        
         self.asteroid: Asteroid = Asteroid(800, 600, 10)
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
