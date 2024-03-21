@@ -19,6 +19,7 @@ class Game(object):
         self.asteroid: Asteroid = Asteroid(800, 600, 10)
         self.asteroid_spawn = pygame.USEREVENT + 1
         pygame.time.set_timer(self.asteroid_spawn, 1000)
+        self.asteroid_list = []
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
         self.ido: Ido = Ido()
@@ -73,9 +74,7 @@ class Game(object):
                 if keys[pygame.K_k]:
                     quit()
             
-            for i in self.
-                self.asteroid == self.asteroid_spawn
-
+            
             pygame.display.update()
             self.clock.tick(FPS)
 
@@ -84,7 +83,8 @@ class Game(object):
         for event in pygame.event.get():
             if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
                 quit()
-            
+            if event.type == self.asteroid_spawn:
+                self.asteroid_list = Asteroid
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.player.rotate(clockwise=True)
         elif keys[pygame.K_LEFT] or keys[pygame.K_a]:

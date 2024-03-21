@@ -1,6 +1,6 @@
 from ctypes.wintypes import RGB
 import pygame
-from random import randint
+
 
 class Asteroid(object):
     def __init__(self, x: int, y: int, velocity: float) -> None:
@@ -53,7 +53,7 @@ class Asteroid(object):
     def wrap_position(self, position: pygame.Vector2, screen: pygame.Surface):
         x, y = position
         w, h = (1700, 950)
-        return pygame.Vector2(x % w + 0.5, y % h + 0.5)
+        return pygame.Vector2(x % w + 0.05, y % h + 0.05)
 
 
 
