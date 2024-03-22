@@ -1,4 +1,5 @@
 import pygame
+import random
 from settings import HEIGHT, WIDTH, FPS
 from asteroid import Asteroid
 from player import Player
@@ -17,8 +18,8 @@ class Game(object):
             self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0)   
         )
         self.asteroid_spawn = pygame.USEREVENT + 1
-        pygame.time.set_timer(self.asteroid_spawn, 10)
-        self.asteroid_list: list[Asteroid] = [Asteroid(800, 600, 1000)]
+        pygame.time.set_timer(self.asteroid_spawn, 2500)
+        self.asteroid_list: list[Asteroid] = [Asteroid(800, 600, 0.3)]
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
         self.ido: Ido = Ido()
@@ -84,7 +85,7 @@ class Game(object):
             if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
                 quit()
             if event.type == self.asteroid_spawn:
-                self.asteroid_list.append(Asteroid(0, 0, 1))
+                self.asteroid_list.append(Asteroid(0, 0, random.randint(10, 150)/50))
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.player.rotate(clockwise=True)
         elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
