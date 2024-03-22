@@ -1,4 +1,3 @@
-from ctypes.wintypes import RGB
 import pygame
 from bullets import Bullets
 from settings import MANEUVERABILITY, UP, SPEED, MAX_SPEED
@@ -20,7 +19,6 @@ class Player:
         self.fly: bool = True
         self.standing_image: pygame.Surface = pygame.image.load("Képek/player_stand.png").convert_alpha()
         self.bullet_list:list[Bullets]=[]
-        self.blast:Bullets=Bullets(self.position, self.direction)
         self.image: pygame.Surface = self.images[self.frame]
 
     def rotate(self, clockwise: bool = True):
@@ -31,18 +29,15 @@ class Player:
     def draw(self, screen: pygame.Surface):
         angle = self.direction.angle_to(UP)
         rotated_image: pygame.Surface = pygame.transform.rotate(self.image, angle)
-        rotated_rect: pygame.Rect = rotated_image.get_rect(
-            center=self.image.get_rect(center=self.position).center
-        )
+        rotated_rect: pygame.Rect = rotated_image.get_rect(center=self.image.get_rect(center=self.position).center)
         screen.blit(rotated_image, rotated_rect)
-        pygame.draw.rect(screen, RGB(0, 0, 255), rotated_rect, 3)
 
     def update(self, screen: pygame.Surface):
         self.animation()
         self.move()
         self.draw(screen)
-        for Bullets in self.bullet_list:
-            Bullets.draw(screen)
+        for blast in self.bullet_list:
+            blast.draw(screen)
 
     def animation(self) -> None:
         if self.fly:
@@ -69,15 +64,13 @@ class Player:
         w, h = (1650, 910)
         return pygame.Vector2(x % w, y % h)
 
-    def shoot(self,screen:pygame.Surface):
-        for self.blast in self.bullet_list:
-            self.blast.draw(screen)
+    def shoot(self):
+        blast:Bullets=Bullets(self.position, self.direction)
         if len(self.bullet_list) < 5:  # This will make sure we cannot exceed 5 bullets on the screen at once
-            self.bullet_list.append(self.blast)
-        for self.blast in self.bullet_list:
-            if self.blast.position.x<1600 and self.blast.position.x>0 and self.blast.position.y<900 and self.blast.position.y>0:
-                self.blast.move()
+            self.bullet_list.append(blast)
+        for blast in self.bullet_list:
+            if blast.position.x<1600 and blast.position.x>0 and blast.position.y<900 and blast.position.y>0:
+                blast.move()
             else:
-                self.bullet_list.remove(self.blast)
-        pygame.display.update()
+                self.bullet_list.remove(blast)
         

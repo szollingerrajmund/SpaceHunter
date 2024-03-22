@@ -85,7 +85,7 @@ class Game(object):
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.player.speed_up()  
         if keys[pygame.K_SPACE]:
-            self.player.shoot(self.screen)
+            self.player.shoot()
 
     def _draw(self):
         Háttérkép = pygame.image.load("Képek/background.png")
