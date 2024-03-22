@@ -20,7 +20,7 @@ class Player:
         self.fly: bool = True
         self.standing_image: pygame.Surface = pygame.image.load("Képek/player_stand.png").convert_alpha()
         self.bullet_list:list[Bullets]=[]
-        self.blast:Bullets=Bullets(self.position//2, self.direction)
+        self.blast:Bullets=Bullets(self.position, self.direction)
         self.image: pygame.Surface = self.images[self.frame]
 
     def rotate(self, clockwise: bool = True):
