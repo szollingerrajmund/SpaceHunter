@@ -69,6 +69,15 @@ class Player:
         w, h = (1650, 910)
         return pygame.Vector2(x % w, y % h)
 
-    def shoot(self):
-        if len(self.bullet_list) < 5:
+    def shoot(self,screen:pygame.Surface):
+        for self.blast in self.bullet_list:
+            self.blast.draw(screen)
+        if len(self.bullet_list) < 5:  # This will make sure we cannot exceed 5 bullets on the screen at once
             self.bullet_list.append(self.blast)
+        for self.blast in self.bullet_list:
+            if self.blast.position.x<1600 and self.blast.position.x>0 and self.blast.position.y<900 and self.blast.position.y>0:
+                self.blast.move()
+            else:
+                self.bullet_list.remove(self.blast)
+        pygame.display.update()
+        

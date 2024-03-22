@@ -7,4 +7,4 @@ MANEUVERABILITY: float = 3
 UP: Vector2 = Vector2(0, -1)
 SPEED: float = 0.05
 MAX_SPEED:float = 7.5
-BULLET_SPEED:float=9
+BULLET_SPEED:float=9.8
