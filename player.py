@@ -38,17 +38,15 @@ class Player:
         self.draw(screen)
         for blast in self.bullet_list:
             blast.draw(screen)
-
+            blast.move()
     def animation(self) -> None:
         if self.fly:
             self.frame += self.changing
             if self.frame >= len(self.images):
                 self.frame = 0
-            self.image = pygame.transform.scale(
-                self.images[int(self.frame)], (100, 100)
-            )
+            self.image = self.images[int(self.frame)]
         else:
-            self.image = pygame.transform.scale(self.standing_image, (100, 100))
+            self.image = self.standing_image
         self.fly = False
 
     def move(self):
@@ -66,11 +64,10 @@ class Player:
 
     def shoot(self):
         blast:Bullets=Bullets(self.position, self.direction)
-        if len(self.bullet_list) < 5:  # This will make sure we cannot exceed 5 bullets on the screen at once
+        if len(self.bullet_list) < 10:
             self.bullet_list.append(blast)
         for blast in self.bullet_list:
             if blast.position.x<1600 and blast.position.x>0 and blast.position.y<900 and blast.position.y>0:
                 blast.move()
             else:
                 self.bullet_list.remove(blast)
-        

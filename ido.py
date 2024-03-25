@@ -1,14 +1,15 @@
 import time
 import pygame
-from settings import HEIGHT, WIDTH
+from settings import WIDTH
 
-
-class Ido(object):
-    def __init__(self):
-        pygame.init()
-        self.screen_res: tuple[int, int] = (WIDTH, HEIGHT)
-        self.screen: pygame.Surface = pygame.display.set_mode(self.screen_res)
+class Time(object):
+    def __init__(self, screen:pygame.Surface):
+        self.screen: pygame.Surface =screen
         self.time_start = time.time()
+
+    def update(self):
+        self.time()
+        self.points()
 
     def time(self):
         game_font = pygame.font.SysFont("Trebuchet", 52)

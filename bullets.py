@@ -2,7 +2,7 @@ import pygame
 from settings import BULLET_SPEED,UP
 
 class Bullets(object):
-    def __init__(self, position:pygame.Vector2, direction:pygame.Vector2):
+    def __init__(self, position:pygame.Vector2,direction:pygame.Vector2):
         self.position:pygame.Vector2=position
         self.direction:pygame.Vector2=direction
         self.velocity=BULLET_SPEED*self.direction

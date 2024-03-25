@@ -2,8 +2,8 @@ import pygame
 from settings import HEIGHT, WIDTH, FPS
 from asteroid import Asteroid
 from player import Player
-from ido import Ido
-from menuk import Menu
+from ido import Time
+from menus import Menu
 from fomenu import Kezdo
 
 
@@ -17,7 +17,7 @@ class Game(object):
         self.asteroid: Asteroid = Asteroid(800, 600, 10)
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
-        self.ido: Ido = Ido()
+        self.time: Time = Time(self.screen)
         self.kezdo: Kezdo = Kezdo(0, HEIGHT // 2)
         pygame.display.set_caption("Space Hunters")
         self.run()
@@ -57,9 +57,7 @@ class Game(object):
                 self._draw()
                 self.player.update(self.screen)
                 self.asteroid.update(self.screen)
-                self.ido.time()
-                self.ido.points()
-                
+                self.time.update()
 
             elif self.game_state == "game_over":
                 self.menu.game_over_menu()
@@ -75,17 +73,17 @@ class Game(object):
     def _input_kezelés(self):
         keys = pygame.key.get_pressed()
         for event in pygame.event.get():
-            if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
+            if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 quit()
-            
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                self.player.shoot()
+
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.player.rotate(clockwise=True)
         elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.player.rotate(clockwise=False)
         if keys[pygame.K_UP] or keys[pygame.K_w]:
-            self.player.speed_up()  
-        if keys[pygame.K_SPACE]:
-            self.player.shoot()
+            self.player.speed_up()
 
     def _draw(self):
         Háttérkép = pygame.image.load("Képek/background.png")
