@@ -35,10 +35,11 @@ class Player:
     def update(self, screen: pygame.Surface):
         self.animation()
         self.move()
-        self.draw(screen)
         for blast in self.bullet_list:
-            blast.draw(screen)
-            blast.move()
+            blast.update(screen)
+        self.draw(screen)
+
+
     def animation(self) -> None:
         if self.fly:
             self.frame += self.changing
