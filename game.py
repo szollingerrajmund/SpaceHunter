@@ -1,6 +1,6 @@
-import pygame
-from pygame.locals import QUIT, K_ESCAPE, K_RIGHT, K_LEFT, K_UP, K_d, K_a, K_w
 import random
+import pygame
+from pygame.locals import QUIT, K_ESCAPE, K_LEFT, K_UP, K_a, K_w
 from settings import HEIGHT, WIDTH, FPS
 from asteroid import Asteroid
 from player import Player
@@ -16,17 +16,9 @@ class Game(object):
         self.screen = pygame.display.set_mode(self.screen_res)
         self.clock = pygame.time.Clock()
         self.player = Player(self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0))
-        self.asteroid = Asteroid(800, 600, 10)
-
-        self.screen_res: tuple[int, int] = (WIDTH, HEIGHT)
-        self.screen: pygame.Surface = pygame.display.set_mode(self.screen_res)
-        self.clock: pygame.time.Clock = pygame.time.Clock()
-        self.player: Player = Player(
-            self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0)   
-        )
         self.asteroid_spawn = pygame.USEREVENT + 1
         pygame.time.set_timer(self.asteroid_spawn, 2500)
-        self.asteroid_list: list[Asteroid] = [Asteroid(800, 600, 0.3)]
+        self.asteroid_list = [Asteroid(800, 600, 0.3)]
 
         self.game_state = "start_menu"
         self.menu = Menu()
@@ -71,21 +63,20 @@ class Game(object):
                 self.player.update(self.screen)
                 for asteroid in self.asteroid_list:
                     asteroid.update(self.screen)
+                    player_rect = self.player.image.get_rect(center=self.player.position)
+                    asteroid_rect = asteroid.image.get_rect(center=asteroid.position)
+                    if player_rect.colliderect(asteroid_rect):
+                        self.game_state = "game_over"
+                        self.player.velocity = pygame.Vector2(0, 0)
                 self.ido.time()
                 self.ido.points()
-
-                player_rect = self.player.image.get_rect(center=self.player.position)
-                asteroid_rect = self.asteroid.image.get_rect(center=self.asteroid.position)
-                if player_rect.colliderect(asteroid_rect):
-                    self.game_state = "game_over"
-                    self.player.velocity = pygame.Vector2(0, 0)
 
             elif self.game_state == "game_over":
                 self.menu.game_over_menu()
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_r]:
                     self.player.position = pygame.Vector2(self.screen_res[0] // 2, self.screen_res[1] // 2)
-                    self.asteroid.position = pygame.Vector2(800, 600)
+                    self.asteroid_list = [Asteroid(800, 600, 0.3)]
                     self.player.velocity = pygame.Vector2(0, 0)
                     self.player.reset_rotation()
                     self.game_state = "start_menu"
@@ -93,8 +84,7 @@ class Game(object):
                 if keys[pygame.K_k]:
                     pygame.quit()
                     quit()
-            
-            
+
             pygame.display.update()
             self.clock.tick(FPS)
 
