@@ -25,6 +25,9 @@ class Player:
         turn = 1 if clockwise else -1
         angle = MANEUVERABILITY * turn
         self.direction.rotate_ip(angle)
+    
+    def reset_rotation(self):
+        self.direction = pygame.Vector2(UP)
 
     def draw(self, screen: pygame.Surface) -> None:
         angle = self.direction.angle_to(UP)
