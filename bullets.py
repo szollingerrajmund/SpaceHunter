@@ -1,22 +1,35 @@
 import pygame
-from settings import BULLET_SPEED, UP
+from settings import BULLET_SPEED
+
 
 class Bullets(object):
     def __init__(self, position: pygame.Vector2, direction: pygame.Vector2):
-        self.position: pygame.Vector2 = pygame.Vector2(position) + pygame.Vector2(0, -25)
+        self.position: pygame.Vector2 = pygame.Vector2(position) + pygame.Vector2(
+            0, -25
+        )
         self.direction: pygame.Vector2 = direction
         self.velocity = BULLET_SPEED * self.direction
-        self.image: pygame.Surface = pygame.image.load("Képek/blast.png").convert_alpha()
+        self.frame: float = 0
+        self.changing: float = 0.8
+        self.images: list[pygame.Surface] = []
+        self.images.append(pygame.image.load("Képek/blast-0.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/blast-1.png").convert_alpha())
+        self.image: pygame.Surface = self.images[self.frame]
 
     def update(self, screen: pygame.Surface):
-        self.move()
+        self.animation()
         self.draw(screen)
+        self.move()
 
     def draw(self, screen: pygame.Surface):
-        angle = self.direction.angle_to(UP)
-        rotated_image: pygame.Surface = pygame.transform.rotate(self.image, angle)
-        rotated_rect: pygame.Rect = rotated_image.get_rect(center=self.image.get_rect(center=self.position).center)
-        screen.blit(rotated_image, rotated_rect)
+        blast_rect: pygame.Rect = self.image.get_rect(center=self.position)
+        screen.blit(self.image, blast_rect)
+
+    def animation(self):
+        self.frame += self.changing
+        if self.frame >= len(self.images):
+            self.frame = 0
+        self.image = self.images[int(self.frame)]
 
     def move(self):
         self.position = self.position + self.velocity

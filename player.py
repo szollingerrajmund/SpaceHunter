@@ -17,8 +17,10 @@ class Player:
         self.frame: float = 0
         self.changing: float = 0.2
         self.fly: bool = True
-        self.standing_image: pygame.Surface = pygame.image.load("Képek/player_stand.png").convert_alpha()
-        self.bullet_list:list[Bullets]=[]
+        self.standing_image: pygame.Surface = pygame.image.load(
+            "Képek/player_stand.png"
+        ).convert_alpha()
+        self.bullet_list: list[Bullets] = []
         self.image: pygame.Surface = self.images[self.frame]
 
     def rotate(self, clockwise: bool = True):
@@ -29,7 +31,9 @@ class Player:
     def draw(self, screen: pygame.Surface):
         angle = self.direction.angle_to(UP)
         rotated_image: pygame.Surface = pygame.transform.rotate(self.image, angle)
-        rotated_rect: pygame.Rect = rotated_image.get_rect(center=self.image.get_rect(center=self.position).center)
+        rotated_rect: pygame.Rect = rotated_image.get_rect(
+            center=self.image.get_rect(center=self.position).center
+        )
         screen.blit(rotated_image, rotated_rect)
 
     def update(self, screen: pygame.Surface):
@@ -38,7 +42,6 @@ class Player:
         for blast in self.bullet_list:
             blast.update(screen)
         self.draw(screen)
-
 
     def animation(self) -> None:
         if self.fly:
@@ -64,11 +67,16 @@ class Player:
         return pygame.Vector2(x % w, y % h)
 
     def shoot(self):
-        blast:Bullets=Bullets(self.position, self.direction)
+        blast: Bullets = Bullets(self.position, self.direction)
         if len(self.bullet_list) < 10:
             self.bullet_list.append(blast)
         for blast in self.bullet_list:
-            if blast.position.x<1600 and blast.position.x>0 and blast.position.y<900 and blast.position.y>0:
+            if (
+                blast.position.x < 1600
+                and blast.position.x > 0
+                and blast.position.y < 900
+                and blast.position.y > 0
+            ):
                 blast.move()
             else:
                 self.bullet_list.remove(blast)
