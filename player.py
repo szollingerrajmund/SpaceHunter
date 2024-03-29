@@ -1,5 +1,6 @@
 import pygame
-from settings import MANEUVERABILITY, UP, SPEED, MAX_SPEED, MIN_SPEED
+from bullets import Bullets
+from settings import MANEUVERABILITY, UP, SPEED, MAX_SPEED
 
 
 class Player:
@@ -19,6 +20,7 @@ class Player:
         self.standing_image: pygame.Surface = pygame.image.load(
             "Képek/player_stand.png"
         ).convert_alpha()
+        self.bullet_list: list[Bullets] = []
         self.image: pygame.Surface = self.images[self.frame]
 
     def rotate(self, clockwise: bool = True):
@@ -29,7 +31,7 @@ class Player:
     def reset_rotation(self):
         self.direction = pygame.Vector2(UP)
 
-    def draw(self, screen: pygame.Surface) -> None:
+    def draw(self, screen: pygame.Surface):
         angle = self.direction.angle_to(UP)
         rotated_image: pygame.Surface = pygame.transform.rotate(self.image, angle)
         rotated_rect: pygame.Rect = rotated_image.get_rect(
@@ -37,9 +39,11 @@ class Player:
         )
         screen.blit(rotated_image, rotated_rect)
 
-    def update(self, screen: pygame.Surface) -> None:
+    def update(self, screen: pygame.Surface):
         self.animation()
         self.move()
+        for blast in self.bullet_list:
+            blast.update(screen)
         self.draw(screen)
 
     def animation(self) -> None:
@@ -47,7 +51,6 @@ class Player:
             self.frame += self.changing
             if self.frame >= len(self.images):
                 self.frame = 0
-
             self.image: pygame.Surface = self.images[int(self.frame)]
         else:
             self.image: pygame.Surface = self.standing_image
@@ -58,7 +61,7 @@ class Player:
 
     def speed_up(self):
         self.velocity += self.direction * SPEED
-        self.velocity = self.velocity.clamp_magnitude(MIN_SPEED, MAX_SPEED)
+        self.velocity = self.velocity.clamp_magnitude(MAX_SPEED)
         self.fly = True
 
     def wrap_position(self, position: pygame.Vector2):
@@ -66,3 +69,17 @@ class Player:
         w, h = (1700, 950)
         return pygame.Vector2((x + 70) % w - 70, (y + 70) % h - 70)
 
+    def shoot(self):
+        blast: Bullets = Bullets(self.position, self.direction)
+        if len(self.bullet_list) < 5:
+            self.bullet_list.append(blast)
+        for blast in self.bullet_list:
+            if (
+                blast.position.x < 1600
+                and blast.position.x > 0
+                and blast.position.y < 900
+                and blast.position.y > 0
+            ):
+                blast.move()
+            else:
+                self.bullet_list.remove(blast)
