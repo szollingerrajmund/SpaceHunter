@@ -68,7 +68,7 @@ class Player:
 
     def shoot(self):
         blast: Bullets = Bullets(self.position, self.direction)
-        if len(self.bullet_list) < 10:
+        if len(self.bullet_list) < 5:
             self.bullet_list.append(blast)
         for blast in self.bullet_list:
             if (

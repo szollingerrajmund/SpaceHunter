@@ -4,9 +4,7 @@ from settings import BULLET_SPEED
 
 class Bullets(object):
     def __init__(self, position: pygame.Vector2, direction: pygame.Vector2):
-        self.position: pygame.Vector2 = pygame.Vector2(position) + pygame.Vector2(
-            0, -25
-        )
+        self.position: pygame.Vector2 = pygame.Vector2(position)
         self.direction: pygame.Vector2 = direction
         self.velocity = BULLET_SPEED * self.direction
         self.frame: float = 0
