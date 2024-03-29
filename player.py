@@ -27,6 +27,9 @@ class Player:
         turn = 1 if clockwise else -1
         angle = MANEUVERABILITY * turn
         self.direction.rotate_ip(angle)
+    
+    def reset_rotation(self):
+        self.direction = pygame.Vector2(UP)
 
     def draw(self, screen: pygame.Surface):
         angle = self.direction.angle_to(UP)
@@ -48,9 +51,9 @@ class Player:
             self.frame += self.changing
             if self.frame >= len(self.images):
                 self.frame = 0
-            self.image = self.images[int(self.frame)]
+            self.image: pygame.Surface = self.images[int(self.frame)]
         else:
-            self.image = self.standing_image
+            self.image: pygame.Surface = self.standing_image
         self.fly = False
 
     def move(self):
@@ -63,8 +66,8 @@ class Player:
 
     def wrap_position(self, position: pygame.Vector2):
         x, y = position
-        w, h = (1650, 910)
-        return pygame.Vector2(x % w, y % h)
+        w, h = (1700, 950)
+        return pygame.Vector2((x + 70) % w - 70, (y + 70) % h - 70)
 
     def shoot(self):
         blast: Bullets = Bullets(self.position, self.direction)
