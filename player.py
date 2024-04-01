@@ -1,6 +1,7 @@
 import pygame
 from bullets import Bullets
 from settings import MANEUVERABILITY, UP, SPEED, MAX_SPEED
+from sound import Sound
 
 
 class Player:
@@ -9,19 +10,19 @@ class Player:
         self.velocity: pygame.Vector2 = pygame.Vector2(velocity)
         self.direction: pygame.Vector2 = pygame.Vector2(UP)
         self.images: list[pygame.Surface] = []
-        self.images.append(pygame.image.load("Képek/player-0.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/player-1.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/player-2.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/player-3.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/player-4.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Player/player-0.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Player/player-1.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Player/player-2.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Player/player-3.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Player/player-4.png").convert_alpha())
         self.frame: float = 0
         self.changing: float = 0.2
         self.fly: bool = True
-        self.standing_image: pygame.Surface = pygame.image.load(
-            "Képek/player_stand.png"
-        ).convert_alpha()
+        self.standing_image: pygame.Surface = pygame.image.load("Képek/Player/player_stand.png").convert_alpha()
         self.bullet_list: list[Bullets] = []
         self.image: pygame.Surface = self.images[self.frame]
+        self.soundeffect:Sound=Sound()
+        self.blast_sound=self.soundeffect.load_sound("sparks")
 
     def rotate(self, clockwise: bool = True):
         turn = 1 if clockwise else -1
@@ -74,12 +75,8 @@ class Player:
         if len(self.bullet_list) < 5:
             self.bullet_list.append(blast)
         for blast in self.bullet_list:
-            if (
-                blast.position.x < 1600
-                and blast.position.x > 0
-                and blast.position.y < 900
-                and blast.position.y > 0
-            ):
+            self.blast_sound.play()
+            if ( blast.position.x < 1600 and blast.position.x > 0 and blast.position.y < 900 and blast.position.y > 0):
                 blast.move()
             else:
                 self.bullet_list.remove(blast)

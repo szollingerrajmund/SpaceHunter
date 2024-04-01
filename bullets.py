@@ -10,8 +10,8 @@ class Bullets(object):
         self.frame: float = 0
         self.changing: float = 0.8
         self.images: list[pygame.Surface] = []
-        self.images.append(pygame.image.load("Képek/blast-0.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/blast-1.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Blast/blast-0.png").convert_alpha())
+        self.images.append(pygame.image.load("Képek/Blast/blast-1.png").convert_alpha())
         self.image: pygame.Surface = self.images[self.frame]
 
     def update(self, screen: pygame.Surface):
