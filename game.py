@@ -7,6 +7,7 @@ from ido import Time
 from menuk import Menu
 from fomenu import Kezdo
 
+
 class Game(object):
     def __init__(self):
         self.screen_res = (WIDTH, HEIGHT)
@@ -106,3 +107,4 @@ class Game(object):
         background_image = pygame.image.load("Képek/background.png")
         background = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
         self.screen.blit(background, (0, 0))
+
