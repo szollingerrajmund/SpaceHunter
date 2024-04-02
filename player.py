@@ -21,14 +21,15 @@ class Player:
         self.standing_image: pygame.Surface = pygame.image.load("Képek/Player/player_stand.png").convert_alpha()
         self.bullet_list: list[Bullets] = []
         self.image: pygame.Surface = self.images[self.frame]
-        self.soundeffect:Sound=Sound()
-        self.blast_sound=self.soundeffect.load_sound("sparks")
+        self.soundeffect: Sound = Sound()
+        self.blast_sound = self.soundeffect.load_sound("blast")
+        self.engine=self.soundeffect.load_sound("engine")
 
     def rotate(self, clockwise: bool = True):
         turn = 1 if clockwise else -1
         angle = MANEUVERABILITY * turn
         self.direction.rotate_ip(angle)
-    
+
     def reset_rotation(self):
         self.direction = pygame.Vector2(UP)
 
@@ -64,6 +65,8 @@ class Player:
         self.velocity += self.direction * SPEED
         self.velocity = self.velocity.clamp_magnitude(MAX_SPEED)
         self.fly = True
+        self.engine.play()
+        self.engine.set_volume(0.2)
 
     def wrap_position(self, position: pygame.Vector2):
         x, y = position
@@ -72,10 +75,11 @@ class Player:
 
     def shoot(self):
         blast: Bullets = Bullets(self.position, self.direction)
+        self.blast_sound.play()
+        self.blast_sound.set_volume(0.3)
         if len(self.bullet_list) < 5:
             self.bullet_list.append(blast)
         for blast in self.bullet_list:
-            self.blast_sound.play()
             if ( blast.position.x < 1600 and blast.position.x > 0 and blast.position.y < 900 and blast.position.y > 0):
                 blast.move()
             else:
