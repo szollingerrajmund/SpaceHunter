@@ -25,6 +25,15 @@ class Game(object):
         self.ido = Ido()
         self.kezdo = Kezdo(0, HEIGHT // 2)
         pygame.display.set_caption("Space Hunters")
+
+        self.collision_timer = 0
+        #Állítani ha kell
+        self.collision_delay_duration = 10
+
+        hatter_zene = "hatter_zene_csere.mp3"
+        pygame.mixer.music.load(hatter_zene)
+        pygame.mixer.music.play(-1)
+
         self.run()
 
     def run(self):
@@ -66,8 +75,13 @@ class Game(object):
                     player_rect = self.player.image.get_rect(center=self.player.position)
                     asteroid_rect = asteroid.image.get_rect(center=asteroid.position)
                     if player_rect.colliderect(asteroid_rect):
-                        self.game_state = "game_over"
-                        self.player.velocity = pygame.Vector2(0, 0)
+                        if self.collision_timer == 0:
+                            self.collision_timer = self.collision_delay_duration
+                        else:
+                            self.collision_timer -= 1
+                            if self.collision_timer == 0:
+                                self.game_state = "game_over"
+                                self.player.velocity = pygame.Vector2(0, 0)
                 self.ido.time()
                 self.ido.points()
 
