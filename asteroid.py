@@ -4,6 +4,7 @@ import random
 WIDTH = 1600
 HEIGHT = 800
 
+
 class Asteroid(object):
     def __init__(self, x: int, y: int, velocity: float) -> None:
         self.position: pygame.Vector2 = pygame.Vector2(x, y)
@@ -37,7 +38,22 @@ class Asteroid(object):
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.time.set_timer(asteroid_spawn, random.randint(1200, 3000))
-    
+
+    running = True
+    clock = pygame.time.Clock()
+
+    while running:
+        clock.tick(60)  # For limiting the framerate to 60 FPS
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == asteroid_spawn:
+                spawn_asteroids()
+
+        for asteroid in asteroids:
+            asteroid.update(screen)
+        pygame.display.update()
+
     def draw(self, screen: pygame.Surface) -> None:
 
         blit_position: pygame.Rect = self.image.get_rect(
