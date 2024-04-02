@@ -1,8 +1,6 @@
 from ctypes.wintypes import RGB
 import pygame
 import random
-WIDTH = 1600
-HEIGHT = 800
 
 
 class Asteroid(object):
@@ -24,35 +22,7 @@ class Asteroid(object):
                 self.images.append(image)
             except Exception as e:
                 print("Ez a kép nem tud betölteni: {}, Hiba: {}".format(image_src, e))
-    
-    asteroids = []
-    asteroid_spawn = pygame.USEREVENT + 1
-    
-    def spawn_asteroids(self):
-        rand_x = random.randint(0, WIDTH)
-        rand_y = random.randint(0, HEIGHT)
-        velocity = random.random(1200, 3000)
-        asteroid = Asteroid(rand_x, rand_y, velocity)
-        asteroids.append(asteroid)
-        
-    pygame.init()
-    screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.time.set_timer(asteroid_spawn, random.randint(1200, 3000))
 
-    running = True
-    clock = pygame.time.Clock()
-
-    while running:
-        clock.tick(60)  # For limiting the framerate to 60 FPS
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            elif event.type == asteroid_spawn:
-                spawn_asteroids()
-
-        for asteroid in asteroids:
-            asteroid.update(screen)
-        pygame.display.update()
 
     def draw(self, screen: pygame.Surface) -> None:
 
