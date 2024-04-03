@@ -1,6 +1,6 @@
 import pygame
 import random
-from settings import HEIGHT, WIDTH, FPS
+from settings import HEIGHT, WIDTH
 from asteroid import Asteroid
 from player import Player
 from ido import Ido
@@ -23,9 +23,11 @@ class Game(object):
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
         self.ido: Ido = Ido()
+        
         self.kezdo: Kezdo = Kezdo(0, HEIGHT // 2)
         pygame.display.set_caption("Space Hunters")
         self.run()
+        
 
     def run(self):
         animation_started = False
@@ -65,7 +67,6 @@ class Game(object):
                     asteroid.update(self.screen)
                 self.ido.time()
                 self.ido.points()
-                
 
             elif self.game_state == "game_over":
                 self.menu.game_over_menu()
@@ -74,10 +75,21 @@ class Game(object):
                     self.game_state = "start_menu"
                 if keys[pygame.K_k]:
                     quit()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pass
+                elif event.type == self.asteroid_spawn:
+                    self.spawn_asteroids()
             
-            
-            pygame.display.update()
-            self.clock.tick(FPS)
+
+    def spawn_asteroids(self):
+        rand_x = random.randint(0, WIDTH + 200)
+        rand_y = random.randint(0, HEIGHT + 200)
+        velocity = random.randint(1, 2)
+        asteroid = Asteroid(rand_x, rand_y, velocity)
+        self.asteroid_list.append(asteroid)
+        pygame.display.update()
 
     def _input_kezelés(self):
         keys = pygame.key.get_pressed()
