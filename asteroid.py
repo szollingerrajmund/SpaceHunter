@@ -1,5 +1,6 @@
 from ctypes.wintypes import RGB
 import pygame
+import random
 
 
 class Asteroid(object):
@@ -7,22 +8,21 @@ class Asteroid(object):
         self.position: pygame.Vector2 = pygame.Vector2(x, y)
         self.velocity: pygame.Vector2 = pygame.Vector2(velocity)
         self.images: list[pygame.Surface] = []
-        self.images.append(pygame.image.load("Képek/Asteroid/1.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/Asteroid/2.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/Asteroid/3.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/Asteroid/4.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/Asteroid/5.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/Asteroid/6.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/Asteroid/7.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/Asteroid/8.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/Asteroid/9.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/Asteroid/10.png").convert_alpha())
+        self.load_images()
         self.frame: float = 0
         self.hitbox: pygame.Rect = pygame.rect.Rect(0, 0, 200, 200)
-        self.frame: float = 0
         self.changing: float = 0.35
+        self.image: pygame.Surface = self.images[int(self.frame)]
 
-        self.image: pygame.Surface = self.images[self.frame]
+    def load_images(self) -> None:
+        for i in range(1, 11):
+            try:
+                image_src = "Képek/Asteroid/{}.png".format(i)
+                image = pygame.image.load(image_src).convert_alpha()
+                self.images.append(image)
+            except Exception as e:
+                print("Ez a kép nem tud betölteni: {}, Hiba: {}".format(image_src, e))
+
 
     def draw(self, screen: pygame.Surface) -> None:
 
