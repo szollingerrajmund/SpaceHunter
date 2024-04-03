@@ -86,14 +86,7 @@ class Game(object):
                             if self.collision_timer == 0:
                                 self.game_state = "game_over"
                                 self.player.velocity = pygame.Vector2(0, 0)
-                self.ido.time()
-                self.ido.points()
                 self.time.update()
-                # player_rect = self.player.image.get_rect(center=self.player.position)
-                # asteroid_rect = self.asteroid.image.get_rect(center=self.asteroid.position)
-                # if player_rect.colliderect(asteroid_rect)
-                #   self.game_state = "game_over"
-                #   self.player.velocity = pygame.Vector2(0, 0)
 
             elif self.game_state == "game_over":
                 self.menu.game_over_menu()
