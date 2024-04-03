@@ -4,7 +4,6 @@ from settings import HEIGHT, WIDTH
 
 class Menu(object):
     def __init__(self):
-        pygame.init()
         self.screen_res: tuple[int, int] = (WIDTH, HEIGHT)
         self.screen: pygame.Surface = pygame.display.set_mode(self.screen_res)
 

@@ -1,18 +1,15 @@
 import time
 import pygame
-from settings import HEIGHT, WIDTH
+from settings import WIDTH
 
+class Time(object):
+    def __init__(self, screen:pygame.Surface):
+        self.screen: pygame.Surface =screen
+        self.time_start = time.time()
 
-class Ido(object):
-    def __init__(self):
-        self.time_start = None
-        pygame.init()
-        self.screen_res: tuple[int, int] = (WIDTH, HEIGHT)
-        self.screen: pygame.Surface = pygame.display.set_mode(self.screen_res)
-        # keys = pygame.key.get_pressed()
-        # if keys[pygame.K_RETURN]:
-        #     if not hasattr(self, "time_start"):
-        #         self.time_start = time.time()
+    def update(self):
+        self.time()
+        self.points()
 
     def time(self):
         if self.time_start is None:
