@@ -22,13 +22,18 @@ class Game(object):
         self.clock: pygame.time.Clock = pygame.time.Clock()
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
+  
+        
+
         self.time: Time = Time(self.screen)
+
         self.kezdo: Kezdo = Kezdo(0, HEIGHT // 2)
         pygame.display.set_caption("Space Hunters")
         self.music = Sound().music()
         self.collision_timer = 0
         self.collision_delay_duration = 10
         self.run()
+        
 
     def run(self):
         animation_started = False
@@ -67,7 +72,6 @@ class Game(object):
                 self.player.update(self.screen)
                 for asteroid in self.asteroid_list:
                     asteroid.update(self.screen)
-
                     player_rect = self.player.image.get_rect(
                         center=self.player.position
                     )
@@ -81,6 +85,7 @@ class Game(object):
                                 self.game_state = "game_over"
                                 self.player.velocity = pygame.Vector2(0, 0)
                 self.time.update()
+
 
             elif self.game_state == "game_over":
                 self.menu.game_over_menu()
@@ -99,6 +104,22 @@ class Game(object):
                 if keys[pygame.K_k]:
                     pygame.quit()
                     quit()
+
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pass
+                elif event.type == self.asteroid_spawn:
+                    self.spawn_asteroids()
+            
+
+    def spawn_asteroids(self):
+        rand_x = random.randint(0, WIDTH + 200)
+        rand_y = random.randint(0, HEIGHT + 200)
+        velocity = random.randint(1, 2)
+        asteroid = Asteroid(rand_x, rand_y, velocity)
+        self.asteroid_list.append(asteroid)
+        pygame.display.update()
 
             pygame.display.update()
             self.clock.tick(FPS)
