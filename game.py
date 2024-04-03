@@ -25,7 +25,7 @@ class Game(object):
         self.time: Time = Time(self.screen)
         self.kezdo: Kezdo = Kezdo(0, HEIGHT // 2)
         pygame.display.set_caption("Space Hunters")
-        self.music=Sound().music()
+        self.music = Sound().music()
         self.collision_timer = 0
         self.collision_delay_duration = 10
         self.run()
@@ -62,13 +62,15 @@ class Game(object):
 
             elif self.game_state == "game":
                 self.game_over = False
-                self.music
+                self.music=True
                 self.draw()
                 self.player.update(self.screen)
                 for asteroid in self.asteroid_list:
                     asteroid.update(self.screen)
-                    
-                    player_rect = self.player.image.get_rect(center=self.player.position)
+
+                    player_rect = self.player.image.get_rect(
+                        center=self.player.position
+                    )
                     asteroid_rect = asteroid.image.get_rect(center=asteroid.position)
                     if player_rect.colliderect(asteroid_rect):
                         if self.collision_timer == 0:
@@ -85,7 +87,9 @@ class Game(object):
                 pygame.mixer.music.pause()
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_r]:
-                    self.player.position = pygame.Vector2(self.screen_res[0] // 2, self.screen_res[1] // 2)
+                    self.player.position = pygame.Vector2(
+                        self.screen_res[0] // 2, self.screen_res[1] // 2
+                    )
                     self.asteroid_list = [Asteroid(800, 600, 0.3)]
                     self.player.velocity = pygame.Vector2(0, 0)
                     self.player.reset_rotation()
@@ -102,13 +106,15 @@ class Game(object):
     def _input_kezeles(self):
         keys = pygame.key.get_pressed()
         for event in pygame.event.get():
-            if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
+            if event.type == pygame.QUIT or (
+                event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE
+            ):
                 pygame.quit()
                 quit()
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 self.player.shoot()
             elif event.type == self.asteroid_spawn:
-                self.asteroid_list.append(Asteroid(0, 0, random.randint(10, 150)/50))
+                self.asteroid_list.append(Asteroid(0, 0, random.randint(10, 150) / 50))
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.player.rotate(clockwise=True)
         elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
@@ -120,4 +126,3 @@ class Game(object):
         background_image = pygame.image.load("Képek/background.png")
         background = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
         self.screen.blit(background, (0, 0))
-
