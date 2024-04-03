@@ -1,6 +1,5 @@
 import random
 import pygame
-from pygame.locals import QUIT, K_ESCAPE, K_LEFT, K_UP, K_a, K_w
 from settings import HEIGHT, WIDTH, FPS
 from asteroid import Asteroid
 from player import Player
@@ -16,18 +15,11 @@ class Game(object):
         self.screen = pygame.display.set_mode(self.screen_res)
         self.clock = pygame.time.Clock()
         self.player = Player(self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0))
-
         self.asteroid_spawn = pygame.USEREVENT + 1
         pygame.time.set_timer(self.asteroid_spawn, 2500)
         self.asteroid_list = [Asteroid(800, 600, 0.3)]
-
-
         self.asteroid = Asteroid(800, 600, 10)
-        self.asteroid_spawn = pygame.USEREVENT + 1
-        pygame.time.set_timer(self.asteroid_spawn, 2500)
-        self.asteroid_list: list[Asteroid] = [Asteroid(800, 600, 0.3)]
         self.clock: pygame.time.Clock = pygame.time.Clock()
-
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
         self.time: Time = Time(self.screen)
