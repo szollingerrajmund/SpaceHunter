@@ -7,6 +7,7 @@ from player import Player
 from ido import Time
 from menuk import Menu
 from fomenu import Kezdo
+from sound import Sound
 
 
 class Game(object):
@@ -32,15 +33,9 @@ class Game(object):
         self.time: Time = Time(self.screen)
         self.kezdo: Kezdo = Kezdo(0, HEIGHT // 2)
         pygame.display.set_caption("Space Hunters")
-
+        self.music=Sound().music()
         self.collision_timer = 0
-        #Állítani ha kell
         self.collision_delay_duration = 10
-
-        hatter_zene = "hatter_zene_csere.mp3"
-        pygame.mixer.music.load(hatter_zene)
-        pygame.mixer.music.play(-1)
-
         self.run()
 
     def run(self):
@@ -75,7 +70,8 @@ class Game(object):
 
             elif self.game_state == "game":
                 self.game_over = False
-                self._draw()
+                self.music
+                self.draw()
                 self.player.update(self.screen)
                 for asteroid in self.asteroid_list:
                     asteroid.update(self.screen)
@@ -95,12 +91,13 @@ class Game(object):
                 self.time.update()
                 # player_rect = self.player.image.get_rect(center=self.player.position)
                 # asteroid_rect = self.asteroid.image.get_rect(center=self.asteroid.position)
-                # if player_rect.colliderect(asteroid_rect):
+                # if player_rect.colliderect(asteroid_rect)
                 #   self.game_state = "game_over"
                 #   self.player.velocity = pygame.Vector2(0, 0)
 
             elif self.game_state == "game_over":
                 self.menu.game_over_menu()
+                pygame.mixer.music.pause()
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_r]:
                     self.player.position = pygame.Vector2(self.screen_res[0] // 2, self.screen_res[1] // 2)
@@ -108,6 +105,7 @@ class Game(object):
                     self.player.velocity = pygame.Vector2(0, 0)
                     self.player.reset_rotation()
                     self.game_state = "start_menu"
+                    pygame.mixer.music.unpause()
                     self.time.reset_time()
                 if keys[pygame.K_k]:
                     pygame.quit()
@@ -121,6 +119,7 @@ class Game(object):
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 pygame.quit()
+                quit()
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 self.player.shoot()
             elif event.type == self.asteroid_spawn:
@@ -132,7 +131,7 @@ class Game(object):
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.player.speed_up()
 
-    def _draw(self):
+    def draw(self):
         background_image = pygame.image.load("Képek/background.png")
         background = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
         self.screen.blit(background, (0, 0))
