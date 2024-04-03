@@ -10,5 +10,5 @@ class Sound:
     
     def music(self):
         pygame.mixer.music.load("Hangok/bg_music.mp3")
-        pygame.mixer.music.set_volume(0.2)
+        pygame.mixer.music.set_volume(0.01)
         return pygame.mixer.music.play(-1)

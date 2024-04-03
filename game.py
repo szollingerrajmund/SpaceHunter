@@ -14,20 +14,12 @@ class Game(object):
         self.screen_res = (WIDTH, HEIGHT)
         self.screen = pygame.display.set_mode(self.screen_res)
         self.clock = pygame.time.Clock()
-        self.player = Player(
-            self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0)
-        )
-
+        self.player = Player(self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0))
         self.asteroid_spawn = pygame.USEREVENT + 1
         pygame.time.set_timer(self.asteroid_spawn, 2500)
         self.asteroid_list = [Asteroid(800, 600, 0.3)]
-
         self.asteroid = Asteroid(800, 600, 10)
-        self.asteroid_spawn = pygame.USEREVENT + 1
-        pygame.time.set_timer(self.asteroid_spawn, 2500)
-        self.asteroid_list: list[Asteroid] = [Asteroid(800, 600, 0.3)]
         self.clock: pygame.time.Clock = pygame.time.Clock()
-
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
         self.time: Time = Time(self.screen)
@@ -70,7 +62,7 @@ class Game(object):
 
             elif self.game_state == "game":
                 self.game_over = False
-                self.music
+                self.music=True
                 self.draw()
                 self.player.update(self.screen)
                 for asteroid in self.asteroid_list:
