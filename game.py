@@ -111,15 +111,6 @@ class Game(object):
                     pass
                 elif event.type == self.asteroid_spawn:
                     self.spawn_asteroids()
-            
-
-    def spawn_asteroids(self):
-        rand_x = random.randint(0, WIDTH + 200)
-        rand_y = random.randint(0, HEIGHT + 200)
-        velocity = random.randint(1, 2)
-        asteroid = Asteroid(rand_x, rand_y, velocity)
-        self.asteroid_list.append(asteroid)
-        pygame.display.update()
 
             pygame.display.update()
             self.clock.tick(FPS)
@@ -143,6 +134,13 @@ class Game(object):
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.player.speed_up()
 
+    def spawn_asteroids(self):
+        rand_x = random.randint(0, WIDTH + 200)
+        rand_y = random.randint(0, 1800)
+        velocity = random.randint(1, 2)
+        asteroid = Asteroid(rand_x, rand_y, velocity)
+        self.asteroid_list.append(asteroid)
+        pygame.display.update()
     def draw(self):
         background_image = pygame.image.load("Képek/background.png")
         background = pygame.transform.scale(background_image, (WIDTH, HEIGHT))

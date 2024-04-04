@@ -23,7 +23,6 @@ class Asteroid(object):
             except Exception as e:
                 print("Ez a kép nem tud betölteni: {}, Hiba: {}".format(image_src, e))
 
-
     def draw(self, screen: pygame.Surface) -> None:
 
         blit_position: pygame.Rect = self.image.get_rect(
