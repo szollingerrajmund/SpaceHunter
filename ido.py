@@ -25,12 +25,7 @@ class Time(object):
         self.time_start = None
 
     def points(self):
-        score = 0
-        score_increment = 1
-        player = pygame.Rect(100, 200, 50, 50)
-        obstacle = pygame.Rect(200, 200, 50, 50)
-        if player.colliderect(obstacle):
-            score += score_increment
+        score:int=0
         game_font = pygame.font.Font("Romulus.ttf", 52)
         score_text = game_font.render(f"Pontszám: {score}", True, (255, 255, 255))
         score_rect = score_text.get_rect(topleft=(WIDTH - 260, 10))

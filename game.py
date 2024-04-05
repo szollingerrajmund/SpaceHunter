@@ -7,6 +7,7 @@ from ido import Time
 from menuk import Menu
 from fomenu import Kezdo
 from sound import Sound
+from bullets import Bullets
 
 
 class Game(object):
@@ -19,12 +20,15 @@ class Game(object):
         pygame.time.set_timer(self.asteroid_spawn, 2500)
         self.asteroid_list = [Asteroid(800, 600, 0.3)]
         self.asteroid:Asteroid = Asteroid(800, 600, 10)
+        self.bullet_list: list[Bullets] = []
         self.clock: pygame.time.Clock = pygame.time.Clock()
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
         self.time: Time = Time(self.screen)
         self.kezdo: Kezdo = Kezdo(0, HEIGHT // 2)
         pygame.display.set_caption("Space Hunters")
+        self.soundeffect: Sound = Sound()
+        self.blast_sound = self.soundeffect.load_sound("blast")
         self.music = Sound().music()
         self.run()
         
@@ -64,12 +68,19 @@ class Game(object):
                 self.music=True
                 self.draw()
                 self.player.update(self.screen)
+                for blast in self.bullet_list:
+                    blast.update(self.screen)
                 for asteroid in self.asteroid_list:
                     asteroid.update(self.screen)
                     player_rect:pygame.Rect = self.player.image.get_rect(center=self.player.position)
                     if player_rect.colliderect(asteroid.hitbox):
                         self.game_state = "game_over"
                         self.player.velocity = pygame.Vector2(0, 0)
+                    for blast in self.bullet_list:
+                        blast_rect:pygame.Rect=blast.image.get_rect(center=blast.position)
+                        if blast_rect.colliderect(asteroid.hitbox):
+                            self.asteroid_list.remove(asteroid)
+                            self.bullet_list.remove(blast)
                 self.time.update()
 
             elif self.game_state == "game_over":
@@ -98,7 +109,7 @@ class Game(object):
                 pygame.quit()
                 quit()
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                self.player.shoot()
+                self.shoot()
             elif event.type == self.asteroid_spawn:
                 self.spawn_asteroids()
         
@@ -122,3 +133,15 @@ class Game(object):
         background_image = pygame.image.load("Képek/background.png")
         background = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
         self.screen.blit(background, (0, 0))
+
+    def shoot(self):
+        blast: Bullets = Bullets(self.player.position, self.player.direction)
+        self.blast_sound.play()
+        self.blast_sound.set_volume(0.3)
+        if len(self.bullet_list) < 4:
+            self.bullet_list.append(blast)
+        for blast in self.bullet_list:
+            if ( blast.position.x < 1600 and blast.position.x > 0 and blast.position.y < 900 and blast.position.y > 0):
+                blast.move()
+            else:
+                self.bullet_list.remove(blast)

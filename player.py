@@ -1,5 +1,4 @@
 import pygame
-from bullets import Bullets
 from settings import MANEUVERABILITY, UP, SPEED, MAX_SPEED
 from sound import Sound
 
@@ -19,10 +18,8 @@ class Player:
         self.changing: float = 0.2
         self.fly: bool = True
         self.standing_image: pygame.Surface = pygame.image.load("Képek/Player/player_stand.png").convert_alpha()
-        self.bullet_list: list[Bullets] = []
         self.image: pygame.Surface = self.images[self.frame]
         self.soundeffect: Sound = Sound()
-        self.blast_sound = self.soundeffect.load_sound("blast")
         self.engine=self.soundeffect.load_sound("engine")
 
     def rotate(self, clockwise: bool = True):
@@ -42,8 +39,6 @@ class Player:
     def update(self, screen: pygame.Surface):
         self.animation()
         self.move()
-        for blast in self.bullet_list:
-            blast.update(screen)
         self.draw(screen)
 
     def animation(self) -> None:
@@ -71,14 +66,4 @@ class Player:
         w, h = (1700, 950)
         return pygame.Vector2((x + 70) % w - 70, (y + 70) % h - 70)
 
-    def shoot(self):
-        blast: Bullets = Bullets(self.position, self.direction)
-        self.blast_sound.play()
-        self.blast_sound.set_volume(0.3)
-        if len(self.bullet_list) < 5:
-            self.bullet_list.append(blast)
-        for blast in self.bullet_list:
-            if ( blast.position.x < 1600 and blast.position.x > 0 and blast.position.y < 900 and blast.position.y > 0):
-                blast.move()
-            else:
-                self.bullet_list.remove(blast)
+    
