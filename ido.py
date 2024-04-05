@@ -14,7 +14,6 @@ class Time(object):
     def time(self):
         if self.time_start is None:
             self.time_start = time.time()
-
         game_font = pygame.font.Font("Romulus.ttf", 52)
         game_time = str(int(time.time() - self.time_start))
         time_surf = game_font.render("Idő: " + game_time + "mp", True, (255, 255, 255))

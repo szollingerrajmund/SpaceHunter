@@ -11,9 +11,7 @@ class Menu(object):
     def start_menu(self):
         Háttérkép = pygame.image.load("Képek/background.png")
         Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
-
         background_with_alpha = Háttér.convert_alpha()
-
         font = pygame.font.Font("Romulus.ttf", 200)
         font2 = pygame.font.Font("Romulus.ttf", 60)
         title = font.render("Space Hunter", True, (255, 255, 255))
