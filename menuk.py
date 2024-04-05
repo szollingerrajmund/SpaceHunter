@@ -1,18 +1,17 @@
 import pygame
 from settings import HEIGHT, WIDTH
-
+from ido import Time
 
 class Menu(object):
     def __init__(self):
         self.screen_res: tuple[int, int] = (WIDTH, HEIGHT)
         self.screen: pygame.Surface = pygame.display.set_mode(self.screen_res)
+        self.time: Time = Time(self.screen)
 
     def start_menu(self):
         Háttérkép = pygame.image.load("Képek/background.png")
         Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
-
         background_with_alpha = Háttér.convert_alpha()
-
         font = pygame.font.Font("Romulus.ttf", 200)
         font2 = pygame.font.Font("Romulus.ttf", 60)
         title = font.render("Space Hunter", True, (255, 255, 255))
@@ -179,6 +178,7 @@ class Menu(object):
         title = font.render("Játék Vége", True, (255, 255, 255))
         restart_button = font2.render("R - Újra", True, (255, 255, 255))
         quit_button = font2.render("K - Kilépés", True, (255, 255, 255))
+        pontszam = font2.render(f"Pontszám:{self.time.points}", True, (255, 255, 255))
         makers = font4.render("Készítők:", True, (255, 255, 255))
         maker1 = font3.render("Major Bálint István", True, (255, 255, 255))
         maker2 = font3.render("Szollinger Rajmund", True, (255, 255, 255))
@@ -199,6 +199,13 @@ class Menu(object):
             (
                 WIDTH / 2 - quit_button.get_width() / 2,
                 HEIGHT / 2 - quit_button.get_height() * 2.8,
+            ),
+        )
+        self.screen.blit(
+            pontszam,
+            (
+                WIDTH / 2 - pontszam.get_width() / 2,
+                HEIGHT / 2 - pontszam.get_height() * 1.5,
             ),
         )
         self.screen.blit(

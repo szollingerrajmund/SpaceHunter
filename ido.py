@@ -14,7 +14,6 @@ class Time(object):
     def time(self):
         if self.time_start is None:
             self.time_start = time.time()
-
         game_font = pygame.font.Font("Romulus.ttf", 52)
         game_time = str(int(time.time() - self.time_start))
         time_surf = game_font.render("Idő: " + game_time + "mp", True, (255, 255, 255))
@@ -25,7 +24,8 @@ class Time(object):
         self.time_start = None
 
     def points(self):
-        score:int=0
+        score = 0
+        score_increment = 50
         game_font = pygame.font.Font("Romulus.ttf", 52)
         score_text = game_font.render(f"Pontszám: {score}", True, (255, 255, 255))
         score_rect = score_text.get_rect(topleft=(WIDTH - 260, 10))
