@@ -36,9 +36,7 @@ class Player:
     def draw(self, screen: pygame.Surface):
         angle = self.direction.angle_to(UP)
         rotated_image: pygame.Surface = pygame.transform.rotate(self.image, angle)
-        rotated_rect: pygame.Rect = rotated_image.get_rect(
-            center=self.image.get_rect(center=self.position).center
-        )
+        rotated_rect: pygame.Rect = rotated_image.get_rect(center=self.image.get_rect(center=self.position).center)
         screen.blit(rotated_image, rotated_rect)
 
     def update(self, screen: pygame.Surface):
