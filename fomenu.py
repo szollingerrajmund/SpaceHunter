@@ -42,7 +42,6 @@ class Kezdo:
     def move(self):
         player_speed = 15
         self.position.x += player_speed
-
         if self.position.x - 180 > WIDTH:
             return False
         return True
@@ -54,18 +53,12 @@ class Kezdo:
 
     def mozog(self):
         animation_running = True
-
         while animation_running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-
             self.screen.fill((255, 255, 255))
-
             self.draw_background()
-
             animation_running = self.move()
-
             self.update()
-
             pygame.display.flip()
