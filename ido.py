@@ -26,7 +26,7 @@ class Time(object):
 
     def points(self):
         score = 0
-        score_increment = 1
+        score_increment = 50
         player = pygame.Rect(100, 200, 50, 50)
         obstacle = pygame.Rect(200, 200, 50, 50)
         if player.colliderect(obstacle):
