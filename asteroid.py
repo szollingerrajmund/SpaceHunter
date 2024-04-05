@@ -1,6 +1,5 @@
 from ctypes.wintypes import RGB
 import pygame
-import random
 
 
 class Asteroid(object):
@@ -10,7 +9,7 @@ class Asteroid(object):
         self.images: list[pygame.Surface] = []
         self.load_images()
         self.frame: float = 0
-        self.hitbox: pygame.Rect = pygame.rect.Rect(0, 0, 200, 200)
+        self.hitbox: pygame.Rect = pygame.rect.Rect(0, 0, 175, 175)
         self.changing: float = 0.35
         self.image: pygame.Surface = self.images[int(self.frame)]
 
@@ -22,7 +21,6 @@ class Asteroid(object):
                 self.images.append(image)
             except Exception as e:
                 print("Ez a kép nem tud betölteni: {}, Hiba: {}".format(image_src, e))
-
 
     def draw(self, screen: pygame.Surface) -> None:
 
@@ -36,7 +34,7 @@ class Asteroid(object):
     def update(self, screen: pygame.Surface) -> None:
         self.animation()
         self.draw(screen)
-        self.moving(screen)
+        self.moving()
 
     def animation(self) -> None:
         self.frame += self.changing
@@ -44,10 +42,10 @@ class Asteroid(object):
             self.frame = 0
         self.image = pygame.transform.scale(self.images[int(self.frame)], (300, 300))
 
-    def moving(self, screen: pygame.Surface):
-        self.position = self.wrap_position(self.position + self.velocity, screen)
+    def moving(self):
+        self.position = self.wrap_position(self.position + self.velocity)
 
-    def wrap_position(self, position: pygame.Vector2, screen: pygame.Surface):
+    def wrap_position(self, position: pygame.Vector2):
         x, y = position
         w, h = (1700, 950)
         return pygame.Vector2(x % w + 0.05, y % h + 0.05)

@@ -20,7 +20,7 @@ class Bullets(object):
         self.move()
 
     def draw(self, screen: pygame.Surface):
-        blast_rect: pygame.Rect = self.image.get_rect(center=self.position)
+        blast_rect:pygame.Rect=self.image.get_rect(center=self.position)
         screen.blit(self.image, blast_rect)
 
     def animation(self):
