@@ -85,11 +85,11 @@ class Menu(object):
             (255, 255, 255),
         )
         oldal_nyil2 = font2.render(
-            "a jobbra nyillal jobbra fordulhatsz",
+            "a jobbra nyillal jobbra fordulsz",
             True,
             (255, 255, 255),
         )
-        speed = font2.render("DE a sebességgel nagyon vigyázz!", True, (255, 255, 255))
+        bullet = font2.render("a SPACE gombbal tüzelsz", True, (255, 255, 255))
         describe = font2.render(
             "Éld túl a legtovább az aszteroidák kikerülésével",
             True,
@@ -134,10 +134,10 @@ class Menu(object):
         )
 
         self.screen.blit(
-            speed,
+            bullet,
             (
-                WIDTH / 2 - speed.get_width() / 2,
-                HEIGHT / 2 - speed.get_height() * 1.5,
+                WIDTH / 2 - bullet.get_width() / 2,
+                HEIGHT / 2 - bullet.get_height() * 1.5,
             ),
         )
 
@@ -178,7 +178,7 @@ class Menu(object):
         title = font.render("Játék Vége", True, (255, 255, 255))
         restart_button = font2.render("R - Újra", True, (255, 255, 255))
         quit_button = font2.render("K - Kilépés", True, (255, 255, 255))
-        pontszam = font2.render(f"Pontszám:{self.time.points}", True, (255, 255, 255))
+        pontszam = font2.render(f"Pontszám: {self.time.points}", True, (255, 255, 255))
         makers = font4.render("Készítők:", True, (255, 255, 255))
         maker1 = font3.render("Major Bálint István", True, (255, 255, 255))
         maker2 = font3.render("Szollinger Rajmund", True, (255, 255, 255))
