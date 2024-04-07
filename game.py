@@ -3,7 +3,7 @@ import pygame
 from settings import HEIGHT, WIDTH, FPS
 from asteroid import Asteroid
 from player import Player
-from ido import Time
+from moduls import Time
 from menuk import Menu
 from fomenu import Kezdo
 from sound import Sound
@@ -81,11 +81,13 @@ class Game(object):
                         if blast_rect.colliderect(asteroid.hitbox):
                             self.asteroid_list.remove(asteroid)
                             self.bullet_list.remove(blast)
+                            self.time.get_points()
                 self.time.update()
 
             elif self.game_state == "game_over":
                 self.menu.game_over_menu()
                 pygame.mixer.music.pause()
+                self.time.score=0
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_r]:
                     self.player.position = pygame.Vector2(self.screen_res[0] // 2, self.screen_res[1] // 2)
@@ -136,10 +138,10 @@ class Game(object):
 
     def shoot(self):
         blast: Bullets = Bullets(self.player.position, self.player.direction)
-        self.blast_sound.play()
-        self.blast_sound.set_volume(0.3)
-        if len(self.bullet_list) < 4:
+        if len(self.bullet_list) < 3:
             self.bullet_list.append(blast)
+            self.blast_sound.play()
+            self.blast_sound.set_volume(0.2)
         for blast in self.bullet_list:
             if ( blast.position.x < 1600 and blast.position.x > 0 and blast.position.y < 900 and blast.position.y > 0):
                 blast.move()
