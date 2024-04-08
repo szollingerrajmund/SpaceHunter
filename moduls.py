@@ -6,6 +6,7 @@ class Time(object):
     def __init__(self, screen:pygame.Surface):
         self.screen: pygame.Surface =screen
         self.time_start = time.time()
+        self.score:int=0
 
     def update(self):
         self.time()
@@ -24,9 +25,10 @@ class Time(object):
         self.time_start = None
 
     def points(self):
-        score = 0
-        score_increment = 50
         game_font = pygame.font.Font("Romulus.ttf", 52)
-        score_text = game_font.render(f"Pontszám: {score}", True, (255, 255, 255))
-        score_rect = score_text.get_rect(topleft=(WIDTH - 260, 10))
+        score_text = game_font.render(f"Pontszám: {self.score}", True, (255, 255, 255))
+        score_rect = score_text.get_rect(topleft=(WIDTH - 300, 10))
         self.screen.blit(score_text, score_rect)
+
+    def get_points(self):
+        self.score+=50
