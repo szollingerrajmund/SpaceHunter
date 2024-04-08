@@ -85,11 +85,11 @@ class Menu(object):
             (255, 255, 255),
         )
         oldal_nyil2 = font2.render(
-            "a jobbra nyillal jobbra fordulhatsz",
+            "a jobbra nyillal jobbra fordulsz",
             True,
             (255, 255, 255),
         )
-        speed = font2.render("DE a sebességgel nagyon vigyázz!", True, (255, 255, 255))
+        bullet = font2.render("a SPACE gombbal tüzelsz", True, (255, 255, 255))
         describe = font2.render(
             "Éld túl a legtovább az aszteroidák kikerülésével",
             True,
@@ -134,10 +134,10 @@ class Menu(object):
         )
 
         self.screen.blit(
-            speed,
+            bullet,
             (
-                WIDTH / 2 - speed.get_width() / 2,
-                HEIGHT / 2 - speed.get_height() * 1.5,
+                WIDTH / 2 - bullet.get_width() / 2,
+                HEIGHT / 2 - bullet.get_height() * 1.5,
             ),
         )
 
