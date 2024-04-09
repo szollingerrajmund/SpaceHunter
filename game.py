@@ -7,7 +7,7 @@ from moduls import Time
 from menus import Menu
 from menu1 import Kezdo
 from music import Sound
-from bullet import Bullets
+from bullets import Bullets
 
 
 class Game(object):
