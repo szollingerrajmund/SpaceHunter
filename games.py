@@ -1,13 +1,13 @@
 import random
 import pygame
 from settings import HEIGHT, WIDTH, FPS
-from asteroid import Asteroid
+from asteroids import Asteroid
 from player import Player
 from moduls import Time
-from menuk import Menu
-from fomenu import Kezdo
-from sound import Sound
-from bullets import Bullets
+from menus import Menu
+from menu1 import Kezdo
+from music import Sound
+from bullet import Bullets
 
 
 class Game(object):
