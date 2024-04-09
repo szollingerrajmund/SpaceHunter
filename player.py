@@ -1,6 +1,6 @@
 import pygame
 from settings import MANEUVERABILITY, UP, SPEED, MAX_SPEED
-from sound import Sound
+from music import Sound
 
 
 class Player:
