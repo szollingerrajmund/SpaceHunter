@@ -1,13 +1,13 @@
 import random
 import pygame
 from settings import HEIGHT, WIDTH, FPS
-from asteroid import Asteroid
+from asteroids import Asteroid
 from player import Player
 from moduls import Time
-from menuk import Menu
-from fomenu import Kezdo
-from sound import Sound
-from bullets import Bullets
+from menus import Menu
+from menu1 import Kezdo
+from music import Sound
+from bullet import Bullets
 
 
 class Game(object):
@@ -18,8 +18,7 @@ class Game(object):
         self.player = Player(self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0))
         self.asteroid_spawn = pygame.USEREVENT + 1
         pygame.time.set_timer(self.asteroid_spawn, 2500)
-        self.asteroid_list = [Asteroid(800, 600, 0.3)]
-        self.asteroid:Asteroid = Asteroid(800, 600, 10)
+        self.asteroid_list:list[Asteroid] = []
         self.bullet_list: list[Bullets] = []
         self.clock: pygame.time.Clock = pygame.time.Clock()
         self.game_state = "start_menu"
@@ -51,6 +50,7 @@ class Game(object):
                 self.menu_started = False
 
             if self.game_state == "start_menu":
+                self.time.score=0
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_RETURN]:
                     self.game_state = "game"
@@ -87,11 +87,10 @@ class Game(object):
             elif self.game_state == "game_over":
                 self.menu.game_over_menu()
                 pygame.mixer.music.pause()
-                self.time.score=0
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_r]:
                     self.player.position = pygame.Vector2(self.screen_res[0] // 2, self.screen_res[1] // 2)
-                    self.asteroid_list = [Asteroid(800, 600, 0.3)]
+                    self.asteroid_list = []
                     self.player.velocity = pygame.Vector2(0, 0)
                     self.player.reset_rotation()
                     self.game_state = "start_menu"
@@ -115,21 +114,24 @@ class Game(object):
             elif event.type == self.asteroid_spawn:
                 self.spawn_asteroids()
         
-        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d] and self.game_state=="game":
             self.player.rotate(clockwise=True)
-        elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
+        elif keys[pygame.K_LEFT] or keys[pygame.K_a] and self.game_state=="game":
             self.player.rotate(clockwise=False)
-        if keys[pygame.K_UP] or keys[pygame.K_w]:
+        if keys[pygame.K_UP] or keys[pygame.K_w] and self.game_state=="game":
             self.player.speed_up()
 
 
     def spawn_asteroids(self):
-        rand_x = random.randint(0, WIDTH + 200)
-        rand_y = random.randint(0, 1800)
-        velocity = random.randint(1, 2)
-        asteroid = Asteroid(rand_x, rand_y, velocity)
-        self.asteroid_list.append(asteroid)
-        pygame.display.update()
+        if self.game_state=="game":
+            rand_x = random.randint(0, WIDTH + 200)
+            rand_y = random.randint(0, 1800)
+            velocity = random.randint(1, 2)
+            asteroid:Asteroid = Asteroid(rand_x, rand_y, velocity)
+            self.asteroid_list.append(asteroid)
+            pygame.display.update()
+        else:
+            return None
 
     def draw(self):
         background_image = pygame.image.load("Képek/background.png")
@@ -137,13 +139,14 @@ class Game(object):
         self.screen.blit(background, (0, 0))
 
     def shoot(self):
-        blast: Bullets = Bullets(self.player.position, self.player.direction)
-        if len(self.bullet_list) < 3:
-            self.bullet_list.append(blast)
-            self.blast_sound.play()
-            self.blast_sound.set_volume(0.2)
-        for blast in self.bullet_list:
-            if ( blast.position.x < 1600 and blast.position.x > 0 and blast.position.y < 900 and blast.position.y > 0):
-                blast.move()
-            else:
-                self.bullet_list.remove(blast)
+        if self.game_state=="game":
+            blast: Bullets = Bullets(self.player.position, self.player.direction)
+            if len(self.bullet_list) < 3:
+                self.bullet_list.append(blast)
+                self.blast_sound.play()
+                self.blast_sound.set_volume(0.2)
+            for blast in self.bullet_list:
+                if ( blast.position.x < 1600 and blast.position.x > 0 and blast.position.y < 900 and blast.position.y > 0):
+                    blast.move()
+                else:
+                    self.bullet_list.remove(blast)
