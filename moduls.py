@@ -2,11 +2,12 @@ import time
 import pygame
 from settings import WIDTH
 
+
 class Time(object):
-    def __init__(self, screen:pygame.Surface):
-        self.screen: pygame.Surface =screen
-        self.time_start = time.time() 
-        self.score:int=0
+    def __init__(self, screen: pygame.Surface):
+        self.screen: pygame.Surface = screen
+        self.time_start = time.time()
+        self.score: int = 0
 
     def update(self):
         self.time()
@@ -31,4 +32,4 @@ class Time(object):
         self.screen.blit(score_text, score_rect)
 
     def get_points(self):
-        self.score+=10
+        self.score += 10

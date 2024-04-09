@@ -2,6 +2,7 @@ import pygame
 from settings import HEIGHT, WIDTH
 from moduls import Time
 
+
 class Menu(object):
     def __init__(self):
         self.screen_res: tuple[int, int] = (WIDTH, HEIGHT)
@@ -75,28 +76,30 @@ class Menu(object):
         Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
         self.screen.blit(Háttér, (0, 0))
         font = pygame.font.Font("Romulus.ttf", 110)
-        font2 = pygame.font.Font("Romulus.ttf", 60)
+        font2 = pygame.font.Font("Romulus.ttf", 50)
         font3 = pygame.font.Font("Romulus.ttf", 65)
         title = font.render("Segítség a játékhoz", True, (255, 255, 255))
-        fel_nyil = font2.render("A fel nyillal mehetsz előre", True, (255, 255, 255))
-        oldal_nyil1 = font2.render(
-            "A ballra nyillal balra,",
+        fel_nyil = font3.render(
+            "A fel nyillal vagy w-vel mehetsz előre", True, (255, 255, 255)
+        )
+        oldal_nyil1 = font3.render(
+            "A ballra nyillal vagy s-sel balra fordulsz,",
             True,
             (255, 255, 255),
         )
-        oldal_nyil2 = font2.render(
-            "a jobbra nyillal jobbra fordulsz",
+        oldal_nyil2 = font3.render(
+            "a jobbra nyillal vagy d-vel jobbra fordulsz",
             True,
             (255, 255, 255),
         )
-        bullet = font2.render("a SPACE gombbal tüzelsz", True, (255, 255, 255))
+        bullet = font3.render("a SPACE gombbal tüzelsz", True, (255, 255, 255))
         describe = font2.render(
-            "Éld túl a legtovább az aszteroidák kikerülésével",
+            "Éld túl a legtovább az aszteroidák kikerülésével és lődd szét a legtöbbet.",
             True,
             (255, 255, 255),
         )
         describe2 = font2.render(
-            "és lődd szét a legtöbbet, hogy te legyél a galaxis megmentője!",
+            "Vigyázz, csak 3 lövésed van, ha ütköznek visszakapod őket!",
             True,
             (255, 255, 255),
         )
@@ -178,7 +181,6 @@ class Menu(object):
         title = font.render("Játék Vége", True, (255, 255, 255))
         restart_button = font2.render("R - Újra", True, (255, 255, 255))
         quit_button = font2.render("K - Kilépés", True, (255, 255, 255))
-        pontszam = font2.render(f"Pontszám:{self.time.score}", True, (255, 255, 255))
         makers = font4.render("Készítők:", True, (255, 255, 255))
         maker1 = font3.render("Major Bálint István", True, (255, 255, 255))
         maker2 = font3.render("Szollinger Rajmund", True, (255, 255, 255))
@@ -202,38 +204,31 @@ class Menu(object):
             ),
         )
         self.screen.blit(
-            pontszam,
-            (
-                WIDTH / 2 - pontszam.get_width() / 2,
-                HEIGHT / 2 - pontszam.get_height() * 1.5,
-            ),
-        )
-        self.screen.blit(
             makers,
             (
                 WIDTH / 2 - makers.get_width() / 2,
-                HEIGHT / 2 + makers.get_height() * 1.35,
+                HEIGHT / 2 - makers.get_height() * 1.35,
             ),
         )
         self.screen.blit(
             maker1,
             (
                 WIDTH / 2 - maker1.get_width() / 2,
-                HEIGHT / 2 + maker1.get_height() * 4,
+                HEIGHT / 2 - maker1.get_height() * 0.4,
             ),
         )
         self.screen.blit(
             maker2,
             (
                 WIDTH / 2 - maker2.get_width() / 2,
-                HEIGHT / 2 + maker2.get_height() * 5.2,
+                HEIGHT / 2 + maker2.get_height() * 0.5,
             ),
         )
         self.screen.blit(
             maker3,
             (
                 WIDTH / 2 - maker3.get_width() / 2,
-                HEIGHT / 2 + maker3.get_height() * 6.5,
+                HEIGHT / 2 + maker3.get_height() * 1.4,
             ),
         )
         pygame.display.update()

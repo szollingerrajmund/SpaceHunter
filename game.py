@@ -16,7 +16,7 @@ class Game(object):
         self.screen = pygame.display.set_mode(self.screen_res)
         self.clock = pygame.time.Clock()
         self.player = Player(self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0))
-        self.asteroid_spawn = pygame.USEREVENT + 1
+        self.asteroid_spawn = pygame.USEREVENT + 20
         pygame.time.set_timer(self.asteroid_spawn, 2500)
         self.asteroid_list:list[Asteroid] = []
         self.bullet_list: list[Bullets] = []
@@ -50,7 +50,6 @@ class Game(object):
                 self.menu_started = False
 
             if self.game_state == "start_menu":
-                self.time.score=0
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_RETURN]:
                     self.game_state = "game"
@@ -85,8 +84,9 @@ class Game(object):
                 self.time.update()
 
             elif self.game_state == "game_over":
+                self.time.get_points()
                 self.menu.game_over_menu()
-                pygame.mixer.music.pause()
+                pygame.mixer.music.stop()
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_r]:
                     self.player.position = pygame.Vector2(self.screen_res[0] // 2, self.screen_res[1] // 2)
@@ -94,7 +94,7 @@ class Game(object):
                     self.player.velocity = pygame.Vector2(0, 0)
                     self.player.reset_rotation()
                     self.game_state = "start_menu"
-                    pygame.mixer.music.unpause()
+                    pygame.mixer.music.play()
                     self.time.reset_time()
                 if keys[pygame.K_k]:
                     pygame.quit()

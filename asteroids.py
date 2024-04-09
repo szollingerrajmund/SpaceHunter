@@ -1,4 +1,3 @@
-from ctypes.wintypes import RGB
 import pygame
 
 
@@ -29,7 +28,6 @@ class Asteroid(object):
         )
         self.hitbox.center = self.position
         screen.blit(self.image, blit_position)
-        pygame.draw.rect(screen, RGB(0, 255, 255), self.hitbox, 3)
 
     def update(self, screen: pygame.Surface) -> None:
         self.animation()
@@ -49,6 +47,3 @@ class Asteroid(object):
         x, y = position
         w, h = (1700, 950)
         return pygame.Vector2(x % w + 0.05, y % h + 0.05)
-
-
-
