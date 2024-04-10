@@ -17,7 +17,7 @@ class Game(object):
         self.clock = pygame.time.Clock()
         self.player = Player( self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0))
         self.asteroid_spawn = pygame.USEREVENT + 20
-        pygame.time.set_timer(self.asteroid_spawn, 1500)
+        pygame.time.set_timer(self.asteroid_spawn, 2000)
         self.asteroid_list: list[Asteroid] = []
         self.bullet_list: list[Bullets] = []
         self.clock: pygame.time.Clock = pygame.time.Clock()
@@ -48,18 +48,8 @@ class Game(object):
             elif self.game_state != "start_menu":
                 self.menu_started = False
 
-            if self.game_state == "start_menu":
-                keys = pygame.key.get_pressed()
-                if keys[pygame.K_RETURN]:
-                    self.game_state = "game"
-                elif keys[pygame.K_h]:
-                    self.game_state = "help"
-
-            elif self.game_state == "help":
+            if self.game_state == "help":
                 self.menu.help_menu()
-                keys = pygame.key.get_pressed()
-                if keys[pygame.K_RETURN]:
-                    self.game_state = "game"
 
             elif self.game_state == "game":
                 self.game_over = False
@@ -70,6 +60,7 @@ class Game(object):
                     blast.update(self.screen)
                 for asteroid in self.asteroid_list:
                     asteroid.update(self.screen)
+                    
                     player_rect: pygame.Rect = self.player.image.get_rect(
                         center=self.player.position
                     )
@@ -129,6 +120,13 @@ class Game(object):
         if keys[pygame.K_UP] or keys[pygame.K_w] and self.game_state == "game":
             self.player.speed_up()
 
+        if self.game_state == "start_menu" and keys[pygame.K_RETURN]:
+            self.game_state = "game"
+        elif self.game_state == "start_menu" and keys[pygame.K_h]:
+            self.game_state = "help"
+        elif self.game_state == "help" and keys[pygame.K_RETURN]:
+            self.game_state = "game"
+
     def spawn_asteroids(self):
         if self.game_state == "game":
             rand_x = random.randint(0, WIDTH + 200)
@@ -141,7 +139,7 @@ class Game(object):
             return None
 
     def draw(self):
-        background_image = pygame.image.load("Képek/background.png")
+        background_image:pygame.Surface = pygame.image.load("Képek/background.png")
         background = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
         self.screen.blit(background, (0, 0))
 
