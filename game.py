@@ -60,10 +60,7 @@ class Game(object):
                     blast.update(self.screen)
                 for asteroid in self.asteroid_list:
                     asteroid.update(self.screen)
-                    
-                    player_rect: pygame.Rect = self.player.image.get_rect(
-                        center=self.player.position
-                    )
+                    player_rect: pygame.Rect = self.player.image.get_rect(center=self.player.position)
                     if player_rect.colliderect(asteroid.hitbox):
                         self.game_state = "game_over"
                         self.player.velocity = pygame.Vector2(0, 0)
