@@ -181,7 +181,6 @@ class Menu(object):
         title = font.render("Játék Vége", True, (255, 255, 255))
         restart_button = font2.render("R - Újra", True, (255, 255, 255))
         quit_button = font2.render("K - Kilépés", True, (255, 255, 255))
-        points = font2.render(f"Pontszám:  ", True, (255, 255, 255))
         makers = font4.render("Készítők:", True, (255, 255, 255))
         maker1 = font3.render("Major Bálint István", True, (255, 255, 255))
         maker2 = font3.render("Szollinger Rajmund", True, (255, 255, 255))
@@ -202,13 +201,6 @@ class Menu(object):
             (
                 WIDTH / 2 - quit_button.get_width() / 2,
                 HEIGHT / 2 - quit_button.get_height() * 2.8,
-            ),
-        )
-        self.screen.blit(
-            points,
-            (
-                WIDTH / 2 - points.get_width() / 2,
-                HEIGHT / 2 - points.get_height() * 3.2,
             ),
         )
         self.screen.blit(
