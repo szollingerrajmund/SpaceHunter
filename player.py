@@ -65,5 +65,3 @@ class Player:
         x, y = position
         w, h = (1700, 950)
         return pygame.Vector2((x + 70) % w - 70, (y + 70) % h - 70)
-
-    
