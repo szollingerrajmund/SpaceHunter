@@ -137,6 +137,9 @@ class Game(object):
 
     def draw(self):
         background_image:pygame.Surface = pygame.image.load("Képek/background.png")
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_m]:
+            background_image: pygame.Surface = pygame.image.load("Képek/Mark.png")
         background = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
         self.screen.blit(background, (0, 0))
 
