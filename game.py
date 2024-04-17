@@ -17,7 +17,7 @@ class Game(object):
         self.clock = pygame.time.Clock()
         self.player = Player( self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0))
         self.asteroid_spawn = pygame.USEREVENT + 20
-        pygame.time.set_timer(self.asteroid_spawn, 2000)
+        pygame.time.set_timer(self.asteroid_spawn, 2500)
         self.asteroid_list: list[Asteroid] = []
         self.bullet_list: list[Bullets] = []
         self.clock: pygame.time.Clock = pygame.time.Clock()
@@ -126,10 +126,9 @@ class Game(object):
 
     def spawn_asteroids(self):
         if self.game_state == "game":
-            rand_x = random.randint(0, WIDTH + 200)
-            rand_y = random.randint(0, 1800)
+            self._spawn_place()
             velocity = random.randint(1, 2)
-            asteroid: Asteroid = Asteroid(rand_x, rand_y, velocity)
+            asteroid: Asteroid = Asteroid(self.proj_x, self.proj_y, velocity)
             self.asteroid_list.append(asteroid)
             pygame.display.update()
         else:
@@ -160,3 +159,11 @@ class Game(object):
                     blast.move()
                 else:
                     self.bullet_list.remove(blast)
+
+    def _spawn_place(self):
+        _side: int = random.randint(1, 2)
+        if _side == 1:
+            self.proj_x, self.proj_y = (random.randint(0, WIDTH), 0)
+        else:
+            self.proj_x, self.proj_y = (0, random.randint(0, HEIGHT))
+
