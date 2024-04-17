@@ -17,8 +17,10 @@ class Game(object):
         self.clock = pygame.time.Clock()
         self.player = Player( self.screen_res[0] // 2, self.screen_res[1] // 2, pygame.Vector2(0))
         self.asteroid_spawn = pygame.USEREVENT + 20
-        pygame.time.set_timer(self.asteroid_spawn, 2500)
+        pygame.time.set_timer(self.asteroid_spawn, 2100)
         self.asteroid_list: list[Asteroid] = []
+        self.asteroid_x:int=0
+        self.asteroid_y:int=0
         self.bullet_list: list[Bullets] = []
         self.clock: pygame.time.Clock = pygame.time.Clock()
         self.game_state = "start_menu"
@@ -128,7 +130,7 @@ class Game(object):
         if self.game_state == "game":
             self._spawn_place()
             velocity = random.randint(1, 2)
-            asteroid: Asteroid = Asteroid(self.proj_x, self.proj_y, velocity)
+            asteroid: Asteroid = Asteroid(self.asteroid_x, self.asteroid_y, velocity)
             self.asteroid_list.append(asteroid)
             pygame.display.update()
         else:
@@ -136,9 +138,6 @@ class Game(object):
 
     def draw(self):
         background_image:pygame.Surface = pygame.image.load("Képek/background.png")
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_m]:
-            background_image: pygame.Surface = pygame.image.load("Képek/Mark.png")
         background = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
         self.screen.blit(background, (0, 0))
 
@@ -163,7 +162,7 @@ class Game(object):
     def _spawn_place(self):
         _side: int = random.randint(1, 2)
         if _side == 1:
-            self.proj_x, self.proj_y = (random.randint(0, WIDTH), 0)
+            self.asteroid_x, self.asteroid_y = (random.randint(0, WIDTH), 0)
         else:
-            self.proj_x, self.proj_y = (0, random.randint(0, HEIGHT))
+            self.asteroid_x,self.asteroid_y = (0, random.randint(0, HEIGHT))
 
