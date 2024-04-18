@@ -2,7 +2,7 @@ import pygame
 from settings import HEIGHT, WIDTH
 
 
-class Kezdo:
+class Starter:
     def __init__(self, x: int, y: int):
         pygame.init()
         self.position: pygame.Vector2 = pygame.Vector2(x, y)
@@ -51,7 +51,7 @@ class Kezdo:
         background = pygame.transform.scale(background, (WIDTH, HEIGHT))
         self.screen.blit(background, (0, 0))
 
-    def mozog(self):
+    def movement(self):
         animation_running = True
         while animation_running:
             for event in pygame.event.get():

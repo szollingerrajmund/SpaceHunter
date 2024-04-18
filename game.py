@@ -5,7 +5,7 @@ from asteroids import Asteroid
 from player import Player
 from moduls import Time
 from menus import Menu
-from menu1 import Kezdo
+from menu1 import Starter
 from music import Sound
 from bullets import Bullets
 
@@ -26,7 +26,7 @@ class Game:
         self.game_state = "start_menu"
         self.menu: Menu = Menu()
         self.time: Time = Time(self.screen)
-        self.kezdo: Kezdo = Kezdo(0, HEIGHT // 2)
+        self.starter: Starter = Starter(0, HEIGHT // 2)
         pygame.display.set_caption("Space Hunters")
         self.soundeffect: Sound = Sound()
         self.blast_sound = self.soundeffect.load_sound("blast")
@@ -38,10 +38,10 @@ class Game:
         self.menu_started = False
 
         while True:
-            self._input_kezeles()
+            self._input()
 
             if not animation_started:
-                self.kezdo.mozog()
+                self.starter.movement()
                 animation_started = True
 
             if self.game_state == "start_menu" and not self.menu_started:
@@ -99,7 +99,7 @@ class Game:
             pygame.display.update()
             self.clock.tick(FPS)
 
-    def _input_kezeles(self):
+    def _input(self):
         keys = pygame.key.get_pressed()
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (
