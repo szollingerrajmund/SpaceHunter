@@ -35,10 +35,14 @@ class Asteroid(object):
         self.moving()
 
     def animation(self) -> None:
-        self.frame += self.changing
-        if self.frame >= len(self.images):
-            self.frame = 0
-        self.image = pygame.transform.scale(self.images[int(self.frame)], (300, 300))
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_m]:
+            self.image: pygame.Surface = pygame.image.load("Képek/easter egg.png").convert_alpha()
+        else:
+            self.frame += self.changing
+            if self.frame >= len(self.images):
+                self.frame = 0
+            self.image = pygame.transform.scale(self.images[int(self.frame)], (300, 300))
 
     def moving(self):
         self.position = self.wrap_position(self.position + self.velocity)
