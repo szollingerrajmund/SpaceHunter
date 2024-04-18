@@ -3,16 +3,16 @@ from settings import HEIGHT, WIDTH
 from moduls import Time
 
 
-class Menu(object):
+class Menu:
     def __init__(self):
         self.screen_res: tuple[int, int] = (WIDTH, HEIGHT)
         self.screen: pygame.Surface = pygame.display.set_mode(self.screen_res)
         self.time: Time = Time(self.screen)
 
     def start_menu(self):
-        Háttérkép = pygame.image.load("Képek/background.png")
-        Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
-        background_with_alpha = Háttér.convert_alpha()
+        background_pic = pygame.image.load("IMG/background.png")
+        background = pygame.transform.scale(background_pic, (WIDTH, HEIGHT))
+        background_with_alpha = background.convert_alpha()
         font = pygame.font.Font("Romulus.ttf", 200)
         font2 = pygame.font.Font("Romulus.ttf", 60)
         title = font.render("Space Hunter", True, (255, 255, 255))
@@ -72,22 +72,22 @@ class Menu(object):
         pygame.display.update()
 
     def help_menu(self):
-        Háttérkép = pygame.image.load("Képek/background.png")
-        Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
-        self.screen.blit(Háttér, (0, 0))
+        background_pic = pygame.image.load("IMG/background.png")
+        background = pygame.transform.scale(background_pic, (WIDTH, HEIGHT))
+        self.screen.blit(background, (0, 0))
         font = pygame.font.Font("Romulus.ttf", 110)
         font2 = pygame.font.Font("Romulus.ttf", 50)
         font3 = pygame.font.Font("Romulus.ttf", 65)
         title = font.render("Segítség a játékhoz", True, (255, 255, 255))
-        fel_nyil = font3.render(
+        up_arrow = font3.render(
             "A fel nyillal vagy w-vel mehetsz előre", True, (255, 255, 255)
         )
-        oldal_nyil1 = font3.render(
-            "A ballra nyillal vagy s-sel balra fordulsz,",
+        side_arrow1 = font3.render(
+            "A ballra nyillal vagy a-val balra fordulsz,",
             True,
             (255, 255, 255),
         )
-        oldal_nyil2 = font3.render(
+        side_arrow2 = font3.render(
             "a jobbra nyillal vagy d-vel jobbra fordulsz",
             True,
             (255, 255, 255),
@@ -113,26 +113,26 @@ class Menu(object):
         )
 
         self.screen.blit(
-            fel_nyil,
+            up_arrow,
             (
-                WIDTH / 2 - fel_nyil.get_width() / 2,
-                HEIGHT / 2 - fel_nyil.get_height() * 4.5,
+                WIDTH / 2 - up_arrow.get_width() / 2,
+                HEIGHT / 2 - up_arrow.get_height() * 4.5,
             ),
         )
 
         self.screen.blit(
-            oldal_nyil1,
+            side_arrow1,
             (
-                WIDTH / 2 - oldal_nyil1.get_width() / 2,
-                HEIGHT / 2 - oldal_nyil1.get_height() * 3.5,
+                WIDTH / 2 - side_arrow1.get_width() / 2,
+                HEIGHT / 2 - side_arrow1.get_height() * 3.5,
             ),
         )
 
         self.screen.blit(
-            oldal_nyil2,
+            side_arrow2,
             (
-                WIDTH / 2 - oldal_nyil2.get_width() / 2,
-                HEIGHT / 2 - oldal_nyil2.get_height() * 2.5,
+                WIDTH / 2 - side_arrow2.get_width() / 2,
+                HEIGHT / 2 - side_arrow2.get_height() * 2.5,
             ),
         )
 
@@ -171,9 +171,9 @@ class Menu(object):
         pygame.display.update()
 
     def game_over_menu(self):
-        Háttérkép = pygame.image.load("Képek/background.png")
-        Háttér = pygame.transform.scale(Háttérkép, (WIDTH, HEIGHT))
-        self.screen.blit(Háttér, (0, 0))
+        background_pic = pygame.image.load("IMG/background.png")
+        background = pygame.transform.scale(background_pic, (WIDTH, HEIGHT))
+        self.screen.blit(background, (0, 0))
         font = pygame.font.Font("Romulus.ttf", 135)
         font2 = pygame.font.Font("Romulus.ttf", 80)
         font3 = pygame.font.Font("Romulus.ttf", 60)

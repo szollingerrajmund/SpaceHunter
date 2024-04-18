@@ -1,7 +1,7 @@
 import pygame
 
 
-class Asteroid(object):
+class Asteroid:
     def __init__(self, x: int, y: int, velocity: float) -> None:
         self.position: pygame.Vector2 = pygame.Vector2(x, y)
         self.velocity: pygame.Vector2 = pygame.Vector2(velocity)
@@ -15,7 +15,7 @@ class Asteroid(object):
     def load_images(self) -> None:
         for i in range(1, 11):
             try:
-                image_src = "Képek/Asteroid/{}.png".format(i)
+                image_src = "IMG/Asteroid/{}.png".format(i)
                 image = pygame.image.load(image_src).convert_alpha()
                 self.images.append(image)
             except Exception as e:
@@ -37,7 +37,7 @@ class Asteroid(object):
     def animation(self) -> None:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_m]:
-            self.image: pygame.Surface = pygame.image.load("Képek/easter egg.png").convert_alpha()
+            self.image: pygame.Surface = pygame.image.load("IMG/easter egg.png").convert_alpha()
         else:
             self.frame += self.changing
             if self.frame >= len(self.images):

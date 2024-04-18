@@ -3,7 +3,7 @@ import pygame
 from settings import WIDTH
 
 
-class Time(object):
+class Time:
     def __init__(self, screen: pygame.Surface):
         self.screen: pygame.Surface = screen
         self.time_start = time.time()
