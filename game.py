@@ -10,7 +10,7 @@ from music import Sound
 from bullets import Bullets
 
 
-class Game(object):
+class Game:
     def __init__(self):
         self.screen_res = (WIDTH, HEIGHT)
         self.screen = pygame.display.set_mode(self.screen_res)
@@ -137,7 +137,7 @@ class Game(object):
             return None
 
     def draw(self):
-        background_image:pygame.Surface = pygame.image.load("Képek/background.png")
+        background_image:pygame.Surface = pygame.image.load("IMG/background.png")
         background = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
         self.screen.blit(background, (0, 0))
 
@@ -165,4 +165,3 @@ class Game(object):
             self.asteroid_x, self.asteroid_y = (random.randint(0, WIDTH), 0)
         else:
             self.asteroid_x,self.asteroid_y = (0, random.randint(0, HEIGHT))
-

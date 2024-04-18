@@ -10,16 +10,16 @@ class Kezdo:
         self.screen: pygame.Surface = pygame.display.set_mode(self.screen_res)
         self.images: list[pygame.Surface] = []
         self.images.append(
-            pygame.image.load("Képek/Oldalra/oldalra_1.png").convert_alpha()
+            pygame.image.load("IMG/Side/side_1.png").convert_alpha()
         )
         self.images.append(
-            pygame.image.load("Képek/Oldalra/oldalra_2.png").convert_alpha()
+            pygame.image.load("IMG/Side/side_2.png").convert_alpha()
         )
         self.images.append(
-            pygame.image.load("Képek/Oldalra/oldalra_3.png").convert_alpha()
+            pygame.image.load("IMG/Side/side_3.png").convert_alpha()
         )
         self.images.append(
-            pygame.image.load("Képek/Oldalra/oldalra_4.png").convert_alpha()
+            pygame.image.load("IMG/Side/side_4.png").convert_alpha()
         )
         self.frame: float = 0
         self.changing: float = 0.35
@@ -47,7 +47,7 @@ class Kezdo:
         return True
 
     def draw_background(self):
-        background = pygame.image.load("Képek/background.png")
+        background = pygame.image.load("IMG/background.png")
         background = pygame.transform.scale(background, (WIDTH, HEIGHT))
         self.screen.blit(background, (0, 0))
 

@@ -9,15 +9,15 @@ class Player:
         self.velocity: pygame.Vector2 = pygame.Vector2(velocity)
         self.direction: pygame.Vector2 = pygame.Vector2(UP)
         self.images: list[pygame.Surface] = []
-        self.images.append(pygame.image.load("Képek/Player/player-0.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/Player/player-1.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/Player/player-2.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/Player/player-3.png").convert_alpha())
-        self.images.append(pygame.image.load("Képek/Player/player-4.png").convert_alpha())
+        self.images.append(pygame.image.load("IMG/Player/player-0.png").convert_alpha())
+        self.images.append(pygame.image.load("IMG/Player/player-1.png").convert_alpha())
+        self.images.append(pygame.image.load("IMG/Player/player-2.png").convert_alpha())
+        self.images.append(pygame.image.load("IMG/Player/player-3.png").convert_alpha())
+        self.images.append(pygame.image.load("IMG/Player/player-4.png").convert_alpha())
         self.frame: float = 0
         self.changing: float = 0.2
         self.fly: bool = True
-        self.standing_image: pygame.Surface = pygame.image.load("Képek/Player/player_stand.png").convert_alpha()
+        self.standing_image: pygame.Surface = pygame.image.load("IMG/Player/player_stand.png").convert_alpha()
         self.image: pygame.Surface = self.images[self.frame]
         self.soundeffect: Sound = Sound()
         self.engine=self.soundeffect.load_sound("engine")
