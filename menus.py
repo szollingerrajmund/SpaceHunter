@@ -17,9 +17,9 @@ class Menu:
         font2 = pygame.font.Font("Romulus.ttf", 60)
         title = font.render("Space Hunter", True, (255, 255, 255))
         start_button = font2.render(
-            "Nyomd meg az ENTER-t a játék elindításához", True, (255, 255, 255)
+            "Press SPACE to start the game", True, (255, 255, 255)
         )
-        help_button = font2.render("H - Segítség", True, (255, 255, 255))
+        help_button = font2.render("H - Help", True, (255, 255, 255))
 
         for alpha in range(0, 256):
             self.screen.blit(background_with_alpha, (0, 0))
@@ -80,31 +80,31 @@ class Menu:
         font3 = pygame.font.Font("Romulus.ttf", 65)
         title = font.render("Segítség a játékhoz", True, (255, 255, 255))
         up_arrow = font3.render(
-            "A fel nyillal vagy w-vel mehetsz előre", True, (255, 255, 255)
+            "You can move forward with 'W'", True, (255, 255, 255)
         )
         side_arrow1 = font3.render(
-            "A ballra nyillal vagy a-val balra fordulsz,",
+            "You can turn to the left with 'A'",
             True,
             (255, 255, 255),
         )
         side_arrow2 = font3.render(
-            "a jobbra nyillal vagy d-vel jobbra fordulsz",
+            "You can turn to the right with 'D'",
             True,
             (255, 255, 255),
         )
-        bullet = font3.render("a SPACE gombbal tüzelsz", True, (255, 255, 255))
+        bullet = font3.render("You can shoot bullets with 'SPACE'", True, (255, 255, 255))
         describe = font2.render(
-            "Éld túl a legtovább az aszteroidák kikerülésével és lődd szét a legtöbbet.",
+            "Dogde the asteroids and shoot them with the bullets to become the hero of the galaxy.",
             True,
             (255, 255, 255),
         )
         describe2 = font2.render(
-            "Vigyázz, csak 3 lövésed van, ha ütköznek visszakapod őket!",
+            "e careful, you only have 3 shots in a row before you get them back!",
             True,
             (255, 255, 255),
         )
         start_button = font3.render(
-            "Nyomd meg az ENTER-t a játék elindításához", True, (255, 255, 255)
+            "Press 'SPACE to start the game", True, (255, 255, 255)
         )
 
         self.screen.blit(
@@ -178,10 +178,10 @@ class Menu:
         font2 = pygame.font.Font("Romulus.ttf", 80)
         font3 = pygame.font.Font("Romulus.ttf", 60)
         font4 = pygame.font.Font("Romulus.ttf", 90)
-        title = font.render("Játék Vége", True, (255, 255, 255))
-        restart_button = font2.render("R - Újra", True, (255, 255, 255))
-        quit_button = font2.render("K - Kilépés", True, (255, 255, 255))
-        makers = font4.render("Készítők:", True, (255, 255, 255))
+        title = font.render("Game Over", True, (255, 255, 255))
+        restart_button = font2.render("R - Restart", True, (255, 255, 255))
+        quit_button = font2.render("K - Exit", True, (255, 255, 255))
+        makers = font4.render("Made by:", True, (255, 255, 255))
         maker1 = font3.render("Major Bálint István", True, (255, 255, 255))
         maker2 = font3.render("Szollinger Rajmund", True, (255, 255, 255))
         maker3 = font3.render("Baracskai Dóra", True, (255, 255, 255))

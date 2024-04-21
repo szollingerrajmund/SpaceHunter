@@ -15,11 +15,11 @@ class Asteroid:
     def load_images(self) -> None:
         for i in range(1, 11):
             try:
-                image_src = "IMG/Asteroid/{}.png".format(i)
+                image_src = "IMG/Asteroid/asteroid_{}.png".format(i)
                 image = pygame.image.load(image_src).convert_alpha()
                 self.images.append(image)
             except Exception as e:
-                print("Ez a kép nem tud betölteni: {}, Hiba: {}".format(image_src, e))
+                print("This picture can't be uploaded: {}, ERROR: {}".format(image_src, e))
 
     def draw(self, screen: pygame.Surface) -> None:
 
