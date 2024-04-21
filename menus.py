@@ -94,12 +94,12 @@ class Menu:
         )
         bullet = font3.render("You can shoot bullets with 'SPACE'", True, (255, 255, 255))
         describe = font2.render(
-            "Dogde the asteroids and shoot them with the bullets to become the hero of the galaxy.",
+            "Dogde the asteroids and shoot them to become the hero of the galaxy.",
             True,
             (255, 255, 255),
         )
         describe2 = font2.render(
-            "e careful, you only have 3 shots in a row before you get them back!",
+            "Be careful, you only have 3 shots in a row before you get them back!",
             True,
             (255, 255, 255),
         )
